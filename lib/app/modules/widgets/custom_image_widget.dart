@@ -10,7 +10,7 @@ class CustomImageWidget extends StatelessWidget {
   final String? imageUrl;
   final Size? size;
   final double? height, radius;
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
   final Color? color;
 
   const CustomImageWidget({
@@ -31,7 +31,7 @@ class CustomImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return (radius != null || borderRadius != null)
         ? ClipRRect(
-            borderRadius: borderRadius ?? radius?.borderRadius,
+            borderRadius: borderRadius!,
             child: child,
           )
         : child;

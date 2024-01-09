@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_getx_template/app/data/api_helper.dart';
 import 'package:flutter_getx_template/app/data/api_helper_impl.dart';
 import 'package:flutter_getx_template/app/data/interface_controller/api_interface_controller.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_error_widget.dart';
@@ -56,12 +55,12 @@ abstract class Initializer {
 class InitialBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ApiHelper>(
-      () => ApiHelperImpl(),
+    Get.put<ApiHelperImpl>(
+       ApiHelperImpl(),
     );
 
-    Get.lazyPut<ApiInterfaceController>(
-      () => ApiInterfaceController(),
+    Get.put<ApiInterfaceController>(
+      ApiInterfaceController(),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:either_dart/either.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/storage/storage.dart';
 import 'package:get/get.dart';
@@ -12,8 +14,12 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
     httpClient.baseUrl = Constants.baseUrl;
     httpClient.timeout = Constants.timeout;
 
-    addRequestModifier();
+    requestInterceptor();
 
+    responseInterceptor();
+  }
+
+  void responseInterceptor() {
     httpClient.addResponseModifier((request, response) {
       printInfo(
         info: 'Status Code: ${response.statusCode}\n'
@@ -24,7 +30,7 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
     });
   }
 
-  void addRequestModifier() {
+  void requestInterceptor() {
     httpClient.addRequestModifier<dynamic>((request) {
       if (Storage.hasData(Constants.token)) {
         request.headers['Authorization'] = Storage.getValue(Constants.token);
@@ -42,7 +48,102 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
   }
 
   @override
-  Future<Response<dynamic>> getPosts() {
-    return get('posts');
+  Future<Either<Exception, Response>> getRequest(
+    String url, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+  }) async {
+    try {
+      return Right(
+        await get(
+          url,
+          headers: headers,
+          contentType: contentType,
+          query: query,
+        ),
+      );
+    } on HttpException catch (e) {
+      return Left(e);
+    } catch (e) {
+      return Left(Exception("Expection ${e.toString()}"));
+    }
+  }
+
+  @override
+  Either<Exception, Future<Response>> postRequest(
+    String? url,
+    dynamic body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    dynamic Function(double)? uploadProgress,
+  }) {
+    try {
+      return Right(
+        post(
+          url,
+          body,
+          contentType: contentType,
+          headers: headers,
+          query: query,
+          uploadProgress: uploadProgress,
+        ),
+      );
+    } on HttpException catch (e) {
+      return Left(e);
+    } on Exception catch (e) {
+      return Left(Exception("Expection ${e.toString()}"));
+    }
+  }
+
+  @override
+  Either<Exception, Future<Response>> putRequest(
+    String url,
+    dynamic body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    dynamic Function(double)? uploadProgress,
+  }) {
+    try {
+      return Right(
+        put(
+          url,
+          body,
+          contentType: contentType,
+          headers: headers,
+          query: query,
+          uploadProgress: uploadProgress,
+        ),
+      );
+    } on HttpException catch (e) {
+      return Left(e);
+    } on Exception catch (e) {
+      return Left(Exception("Expection ${e.toString()}"));
+    }
+  }
+
+  @override
+  Either<Exception, Future<Response>> deleteRequest(
+    String url, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+  }) {
+    try {
+      return Right(
+        delete(
+          url,
+          headers: headers,
+          contentType: contentType,
+          query: query,
+        ),
+      );
+    } on HttpException catch (e) {
+      return Left(e);
+    } on Exception catch (e) {
+      return Left(Exception("Expection ${e.toString()}"));
+    }
   }
 }

@@ -73,12 +73,14 @@ abstract class Utils {
                 ),
               ),
               SizedBox(height: 10.w),
-              Text(message,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.regularStyle.copyWith(
-                    color: AppColors.mineShaft,
-                    fontSize: Dimens.fontSize16,
-                  )),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.regularStyle.copyWith(
+                  color: AppColors.mineShaft,
+                  fontSize: Dimens.fontSize16,
+                ),
+              ),
               SizedBox(height: 20.w),
               CustomTextButton(
                 title: Strings.ok,
@@ -218,7 +220,7 @@ abstract class Utils {
                           color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -250,11 +252,11 @@ abstract class Utils {
                           color: AppColors.mineShaft,
                           fontSize: Dimens.fontSize16,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -282,7 +284,7 @@ abstract class Utils {
           CropAspectRatioPreset.ratio3x2,
           CropAspectRatioPreset.original,
           CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
+          CropAspectRatioPreset.ratio16x9,
         ],
         androidUiSettings: const AndroidUiSettings(
           toolbarColor: Colors.transparent,

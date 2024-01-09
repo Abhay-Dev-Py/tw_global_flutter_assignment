@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      builder: () => GetMaterialApp(
+      useInheritedMediaQuery: true,
+      designSize: const Size(360, 640),
+      builder: (_, __) => GetMaterialApp(
         title: Strings.appName,
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme,

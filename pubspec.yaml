@@ -39,6 +39,9 @@ dependencies:
   intl: ^0.17.0
 
   octo_image: ^1.0.1
+  either_dart: ^1.0.0
+  json_serializable: ^6.7.1
+  modal_progress_hud_nsn: ^0.4.0
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +59,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

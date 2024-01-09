@@ -41,7 +41,7 @@ class CustomCardWidget extends StatelessWidget {
           ),
           if (trailing != null) ...[
             const Spacer(),
-            trailing!
+            trailing!,
           ] else if (trailingText != null) ...[
             const Spacer(),
             CircleAvatar(
