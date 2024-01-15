@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_template/app/common/util/extensions.dart';
-import 'package:flutter_getx_template/app/common/values/app_colors.dart';
-import 'package:flutter_getx_template/app/common/values/styles/app_text_style.dart';
-import 'package:flutter_getx_template/app/common/values/styles/dimens.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_getx_template/app/common/util/exports.dart';
 
 abstract class AppTheme {
   static ThemeData get theme {
@@ -18,6 +14,7 @@ abstract class AppTheme {
 
     return ThemeData(
       brightness: Brightness.light,
+      fontFamily: AppAssets.fonts.manrope,
       primaryColor: AppColors.kPrimaryColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: const AppBarTheme(
@@ -51,7 +48,7 @@ abstract class AppTheme {
           ),
           shape: MaterialStateProperty.resolveWith<RoundedRectangleBorder>(
             (states) => RoundedRectangleBorder(
-              borderRadius: 10.borderRadius,
+              borderRadius: 24.borderRadius,
             ),
           ),
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(

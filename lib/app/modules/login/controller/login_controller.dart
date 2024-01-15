@@ -1,31 +1,31 @@
-import 'package:either_dart/either.dart';
-import 'package:flutter_getx_template/app/common/util/utils.dart';
-import 'package:flutter_getx_template/app/common/values/api_strings.dart';
-import 'package:flutter_getx_template/app/data/api_helper_impl.dart';
-import 'package:flutter_getx_template/app/modules/home/data/models/products_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
+import 'package:flutter_getx_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
-  Rx<ProductModel?> productData = null.obs;
-  RxBool isLoading = false.obs;
-  final ApiHelperImpl _apiHelper = Get.find();
+class LoginProvider extends ChangeNotifier {
+  bool isLoading = false;
+  Role role = Role.agent;
+  get getIsLoading => this.isLoading;
 
-  onButtonPressed() async {
-    isLoading.value = true;
-    try {
-      Either<Exception, Response<dynamic>> rawData =
-          await _apiHelper.getRequest(ApiRoutes.products);
-      if (rawData.isRight) {
-        productData.value = ProductModel.fromJson(rawData.right.body);
-      } else {
-        productData.value = null;
-        Utils.showSnackbar("Exception ${rawData.left.toString()}");
-      }
-    } catch (e) {
-      productData.value = null;
-      Utils.showSnackbar("Exception ${e.toString()}");
-    } finally {
-      isLoading.value = false;
-    }
+  set setIsLoading(isLoading) {
+    this.isLoading = isLoading;
+    notifyListeners();
+  }
+
+  get getRole => this.role;
+
+  set setRole(role) {
+    this.role = role;
+    notifyListeners();
+  }
+
+  void onSignIn(Role role) {
+    // Get.toNamed(Routes.ONBOARDING_LOCATION);
+  }
+
+  void onGetStarted(Role role) {
+    Get.toNamed(Routes.ONBOARDING_LOCATION);
+    // AppNavigation.goNamed(Routes.ONBOARDING_LOCATION);
   }
 }

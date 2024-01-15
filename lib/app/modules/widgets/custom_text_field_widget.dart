@@ -30,7 +30,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
-    this.validator = Validators.validateEmpty,
+    this.validator = AppValidators.validateEmpty,
     this.onChanged,
     this.onSaved,
     this.maxLength,
@@ -75,17 +75,43 @@ class CustomTextFieldWidget extends StatelessWidget {
           ? null
           : [
               LengthLimitingTextInputFormatter(maxLength),
-              if (keyboardType == TextInputType.number)
+              if (keyboardType == TextInputType.number ||
+                  keyboardType == TextInputType.phone)
                 FilteringTextInputFormatter.digitsOnly,
             ],
       decoration: InputDecoration(
         fillColor: fillColor,
         filled: fillColor != null,
         isDense: isDense,
-        border: border,
-        enabledBorder: border,
-        focusedBorder: border,
-        // alignLabelWithHint: maxLines == null,
+        border: border ??
+            OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: const BorderSide(
+                color: AppColors.blue,
+              ),
+            ),
+        enabledBorder: border ??
+            OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: const BorderSide(
+                color: AppColors.doveGray,
+              ),
+            ),
+        focusedBorder: border ??
+            OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: const BorderSide(
+                color: AppColors.blue,
+                width: 2,
+              ),
+            ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.0),
+          borderSide: const BorderSide(
+            color: AppColors.doveGray,
+            width: 2,
+          ),
+        ),
         labelText: addHint
             ? null
             : ((controller?.text != null || !readOnly) ? labelText : null),
@@ -115,6 +141,10 @@ class CustomTextFieldWidget extends StatelessWidget {
               maxHeight: 40.h,
               maxWidth: 40.w,
             ),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 18.h,
+          horizontal: 10.w,
+        ),
       ),
     );
   }

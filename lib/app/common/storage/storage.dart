@@ -15,4 +15,13 @@ abstract class Storage {
   static Future<void> removeValue(String key) => _storage.remove(key);
 
   static Future<void> clearStorage() => _storage.erase();
+
+  static getOnboardingJson() {
+    String? rawModelData = _storage.read("onboardingModel");
+    if(rawModelData != null && rawModelData.isNotEmpty)
+    {
+      // decode the json
+      
+    }
+  }
 }

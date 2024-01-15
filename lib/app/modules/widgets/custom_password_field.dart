@@ -21,7 +21,7 @@ class PasswordFieldWidget extends StatelessWidget {
     this.onChanged,
     this.onSaved,
     this.initialValue,
-    this.validator = Validators.validatePassword,
+    this.validator = AppValidators.validatePassword,
     this.textInputAction = TextInputAction.next,
     this.prefixIcon,
   }) : super(key: key);

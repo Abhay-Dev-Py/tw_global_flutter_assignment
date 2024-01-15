@@ -8,6 +8,7 @@ import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dar
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 abstract class Utils {
   static void showDialog(
@@ -301,4 +302,14 @@ abstract class Utils {
 
     return croppedFile;
   }
+
+  static String formatDateString(String dateString) {
+  try {
+    DateTime dateTime = DateTime.parse(dateString);
+    String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
+    return formattedDate;
+  } catch (e) {
+    return "Invalid Date";
+  }
+}
 }

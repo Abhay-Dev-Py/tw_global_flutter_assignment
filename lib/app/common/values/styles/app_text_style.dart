@@ -116,7 +116,7 @@ abstract class AppTextStyle {
 
   static final TextStyle buttonTextStyle = _textStyle.copyWith(
     fontSize: Dimens.fontSize16,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w500,
   );
 
   static const TextStyle _textStyle = TextStyle(

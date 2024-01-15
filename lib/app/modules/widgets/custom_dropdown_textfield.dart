@@ -48,7 +48,7 @@ class CustomDropdownTextField<T> extends StatelessWidget {
                 contentPadding: EdgeInsets.symmetric(horizontal: 12.w),
               ),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: Validators.validateTEmpty,
+              validator: AppValidators.validateTEmpty,
               onChanged: onChanged,
               onSaved: onSaved,
               items: dataList

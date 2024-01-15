@@ -1,7 +1,8 @@
 class _AppFonts {
-  static const String _baseFontUrl = "assets/fonts";
+  static const String _baseFontUrl = "assets/google_fonts";
 
   ///add app fonts here
+  final String manrope ='$_baseFontUrl/Manrope/Manrope-VariableFont_wght.ttf';
   final String nunitoBold = '$_baseFontUrl/Nunito-Bold.ttf';
   final String nunitoRegular = '$_baseFontUrl/Nunito-Regular.ttf';
   final String nunitoSemiBold = '$_baseFontUrl/Nunito-SemiBold.ttf';
@@ -12,6 +13,8 @@ class _AppImages {
 
   ///add app images here
   final String icGallery = '$_baseImageUrl/ic_gallery.png';
+  final String onboardingLocation = '$_baseImageUrl/onboarding_location.png';
+  final String biometric = '$_baseImageUrl/biometric.png';
 }
 
 class _AppSvgs {

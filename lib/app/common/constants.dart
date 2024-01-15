@@ -9,3 +9,5 @@ abstract class Constants {
       '?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60';
   static const String placeHolderBlurHash = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
 }
+
+enum Role { agent, admin }

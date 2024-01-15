@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/modules/home/data/repositories/home_repository_impl.dart';
 import 'package:get/get.dart';
 
@@ -26,4 +27,16 @@ class HomeController extends GetxController {
       printError(info: "--> Errors $e");
     }
   }
+}
+
+class HomeProvider extends ChangeNotifier {
+  String data = "Here's my data";
+
+  String get getData => data;
+  set setData(value) {
+    data = value;
+    notifyListeners();
+  }
+
+  
 }

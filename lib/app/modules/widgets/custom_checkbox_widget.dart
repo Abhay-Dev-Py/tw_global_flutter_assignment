@@ -12,7 +12,7 @@ class CustomCheckboxWidget extends FormField<bool> {
           initialValue: value,
           onSaved: onSaved,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (v) => Validators.validateCheckbox(v: v!),
+          validator: (v) => AppValidators.validateCheckbox(v: v!),
           builder: (state) {
             return CheckboxListTile(
               dense: state.hasError,

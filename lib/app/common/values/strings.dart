@@ -18,11 +18,15 @@ abstract class Strings {
   static const String emailOrMobile = '$emailAddress or $mobileNumber';
   static const String cantBeEmpty = "can't be empty.";
   static const String fieldCantBeEmpty = 'Field $cantBeEmpty';
+  static const String ageMustBeGreaterThan18 = 'Age must be greater than 18';
   static const String numberCantBeEmpty = '$emailOrMobile $cantBeEmpty';
   static const String emailCantBeEmpty = 'Email $cantBeEmpty';
   static const String enterValid = 'Please enter a valid';
   static const String enterValidNumber = '$enterValid $mobileNumber.';
+  static const String enterValidPAN = '$enterValid PAN card details.';
+  static const String enterValidOTP = '$enterValid OTP.';
   static const String enterValidEmail = '$enterValid email.';
+  static const String enterValidDOB = '$enterValid DOB';
   static const String password = 'Password';
   static const String confirmPassword = 'Confirm $password';
   static const String enterPassword = 'Enter $password';
@@ -38,5 +42,5 @@ abstract class Strings {
   static const from = 'From';
   static const to = 'To';
   static const success = 'Success';
-  static const checkboxValidation = 'Dummy Checkbox Validation Message';
+  static const checkboxValidation = 'Can not proceed further without accepting';
 }
