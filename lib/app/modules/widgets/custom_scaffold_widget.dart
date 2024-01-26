@@ -8,7 +8,9 @@ class AppScaffold extends StatefulWidget {
   final AppBar? appBar;
   final Widget body;
   final Color backgroundColor;
-  final List<Widget>? persistentFooterButtons;
+  final Widget? bottomSheet;
+  final double? bottomSheetHeight;
+  final bool isBannerRequired;
 
   const AppScaffold({
     Key? key,
@@ -16,7 +18,9 @@ class AppScaffold extends StatefulWidget {
     this.appBar,
     required this.body,
     this.backgroundColor = AppColors.kPrimaryColor,
-    this.persistentFooterButtons,
+    this.bottomSheet,
+    this.bottomSheetHeight,
+    this.isBannerRequired = false,
   }) : super(key: key);
 
   @override
@@ -37,12 +41,34 @@ class _AppScaffoldState extends State<AppScaffold> {
             inAsyncCall: widget.inAsyncCall,
             child: Scaffold(
               appBar: widget.appBar,
-              body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: widget.body,
+              body: Stack(
+                children: [
+                  if (widget.isBannerRequired)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Image.asset(AppAssets.pngs.signInPasscodeBanner),
+                    ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: widget.body,
+                    ),
+                  ),
+                ],
               ),
               backgroundColor: widget.backgroundColor,
-              persistentFooterButtons: widget.persistentFooterButtons,
+              // persistentFooterButtons: widget.persistentFooterButtons,
+              bottomSheet: widget.bottomSheet != null
+                  ? Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      height: widget.bottomSheetHeight ?? 54.h,
+                      color: widget.backgroundColor,
+                      child: widget.bottomSheet,
+                    )
+                  : null,
+              resizeToAvoidBottomInset: true,
             ),
           ),
         ),

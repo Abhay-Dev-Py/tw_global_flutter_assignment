@@ -1,27 +1,32 @@
-AgentOnboardingModel onboardingModel = AgentOnboardingModel();
+AgentOnboardingModel _onboardingModel = AgentOnboardingModel(
+  panDetails: PanDetails(),
+  shopDetails: ShopDetails(),
+  iibfCertificateDetails: IibfCertificateDetails(),
+);
 
-AgentOnboardingModel get getOnboardingModel => onboardingModel;
+AgentOnboardingModel get getOnboardingModel => _onboardingModel;
 
-set setOnboardingModel(AgentOnboardingModel value) => onboardingModel = value;
+set setOnboardingModel(AgentOnboardingModel value) => _onboardingModel = value;
 
 class AgentOnboardingModel {
   String? mobileNumber;
   String? emailAddress;
   String? passcode;
   bool? biometricStatus;
-  PanDetails? panDetails;
-  ShopDetails? shopDetails;
-  IibfCertificateDetails? iibfCertificateDetails;
+  PanDetails panDetails = PanDetails();
+  ShopDetails shopDetails = ShopDetails();
+  IibfCertificateDetails iibfCertificateDetails = IibfCertificateDetails();
   String? offlineVerificationDateTime;
+  
 
   AgentOnboardingModel({
     this.mobileNumber,
     this.emailAddress,
     this.passcode,
     this.biometricStatus,
-    this.panDetails,
-    this.shopDetails,
-    this.iibfCertificateDetails,
+    required this.panDetails,
+    required this.shopDetails,
+    required this.iibfCertificateDetails,
     this.offlineVerificationDateTime,
   });
 
@@ -30,34 +35,23 @@ class AgentOnboardingModel {
     emailAddress = json['email_address'];
     passcode = json['passcode'];
     biometricStatus = json['biometric_status'];
-    panDetails = json['pan_details'] != null
-        ? PanDetails.fromJson(json['pan_details'])
-        : null;
-    shopDetails = json['shop_details'] != null
-        ? ShopDetails.fromJson(json['shop_details'])
-        : null;
-    iibfCertificateDetails = json['iibf_certificate_details'] != null
-        ? IibfCertificateDetails.fromJson(json['iibf_certificate_details'])
-        : null;
+    panDetails = PanDetails.fromJson(json['pan_details']);
+
+    shopDetails = ShopDetails.fromJson(json['shop_details']);
+    iibfCertificateDetails =  IibfCertificateDetails.fromJson(json['iibf_certificate_details']);
     offlineVerificationDateTime = json['offline_verification_date_time'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['mobile_number'] = this.mobileNumber;
-    data['email_address'] = this.emailAddress;
-    data['passcode'] = this.passcode;
-    data['biometric_status'] = this.biometricStatus;
-    if (this.panDetails != null) {
-      data['pan_details'] = this.panDetails!.toJson();
-    }
-    if (this.shopDetails != null) {
-      data['shop_details'] = this.shopDetails!.toJson();
-    }
-    if (this.iibfCertificateDetails != null) {
-      data['iibf_certificate_details'] = this.iibfCertificateDetails!.toJson();
-    }
-    data['offline_verification_date_time'] = this.offlineVerificationDateTime;
+    data['mobile_number'] = mobileNumber;
+    data['email_address'] = emailAddress;
+    data['passcode'] = passcode;
+    data['biometric_status'] = biometricStatus;
+    data['pan_details'] = panDetails.toJson();
+    data['shop_details'] = shopDetails.toJson();
+    data['iibf_certificate_details'] = iibfCertificateDetails.toJson();
+      data['offline_verification_date_time'] = offlineVerificationDateTime;
     return data;
   }
 }
@@ -77,9 +71,9 @@ class PanDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['pan_number'] = this.panNumber;
-    data['full_name'] = this.fullName;
-    data['date_of_birth'] = this.dateOfBirth;
+    data['pan_number'] = panNumber;
+    data['full_name'] = fullName;
+    data['date_of_birth'] = dateOfBirth;
     return data;
   }
 }
@@ -112,12 +106,12 @@ class ShopDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['shop_name'] = this.shopName;
-    data['shop_address'] = this.shopAddress;
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['country'] = this.country;
-    data['pincode'] = this.pincode;
+    data['shop_name'] = shopName;
+    data['shop_address'] = shopAddress;
+    data['city'] = city;
+    data['state'] = state;
+    data['country'] = country;
+    data['pincode'] = pincode;
     return data;
   }
 }
@@ -144,10 +138,10 @@ class IibfCertificateDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['registration_number'] = this.registrationNumber;
-    data['serial_number'] = this.serialNumber;
-    data['date_of_certificate_issue'] = this.dateOfCertificateIssue;
-    data['certificate_photo_file_path'] = this.certificatePhotoFilePath;
+    data['registration_number'] = registrationNumber;
+    data['serial_number'] = serialNumber;
+    data['date_of_certificate_issue'] = dateOfCertificateIssue;
+    data['certificate_photo_file_path'] = certificatePhotoFilePath;
     return data;
   }
 }

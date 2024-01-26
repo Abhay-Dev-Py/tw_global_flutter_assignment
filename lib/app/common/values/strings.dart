@@ -24,6 +24,8 @@ abstract class Strings {
   static const String enterValid = 'Please enter a valid';
   static const String enterValidNumber = '$enterValid $mobileNumber.';
   static const String enterValidPAN = '$enterValid PAN card details.';
+  static const String enterValidIIBF = 'Enter a valid IIBF registration number';
+  static const String enterValidIIBFSerial = 'Enter a valid IIBF serial number';
   static const String enterValidOTP = '$enterValid OTP.';
   static const String enterValidEmail = '$enterValid email.';
   static const String enterValidDOB = '$enterValid DOB';

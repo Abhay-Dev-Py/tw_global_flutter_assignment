@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/providers/passcode_provider.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
-import 'package:flutter_getx_template/app/common/util/validators.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_app_text.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_passcode_keyboard.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_scaffold_widget.dart';
-import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
-import 'package:flutter_getx_template/app/modules/widgets/custom_text_field_widget.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -42,38 +42,50 @@ class _OnboardingSetPasscodeViewState extends State<OnboardingSetPasscodeView> {
             },
           ),
           SizedBox(height: 10.h),
-          Consumer<OnboardingProvider>(
-            builder: (context, value, _) {
-              return CustomTextFieldWidget(
-                labelText: "Set Appreciate Passcode",
-                controller: value.passcodeController,
-                onChanged: (updatedText) {
-                  value.setPasscodeControllerValue = updatedText ?? "";
-                },
-                validator: (value) => AppValidators.validatePasscode(value),
-                keyboardType: TextInputType.phone,
-                maxLength: 4,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+            decoration: ShapeDecoration(
+              color: AppColors.lightGrey,
+              shape: RoundedRectangleBorder(
+                side: const BorderSide(width: 1, color: AppColors.blue),
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.topCenter,
+                  child: MyText(
+                    title: "Set Appreciate Passcode",
+                    color: AppColors.hintInfotextColor,
+                  ),
+                ),
+                SizedBox(height: 1.sh * 0.01),
+                const CircularPasscodeInput(),
+              ],
+            ),
+          ),
+          // SizedBox(height: 0.025.sh),
+          const Spacer(),
+          Consumer2<OnboardingProvider, PasscodeProvider>(
+            builder: (context, onboardingProvider, passcodeProvider, __) {
+              return SizedBox(
+                // height: 200.h,
+                child: NumberKeyboard(
+                  type: PassCodeType.signupsetPasscode,
+                  userName: '',
+                  onPasscodeTyped: (passcodeValue) {
+                    onboardingProvider.setPasscodeControllerValue =
+                        passcodeValue;
+                    onboardingProvider.currentStep =
+                        OnboardingSteps.confirm_passcode;
+                    Get.toNamed(Routes.ONBOARDING_CONFIRM_PASSCODE);
+                    // clear passcode
+                    passcodeProvider.clearPassCode();
+                  },
+                ),
               );
             },
-          ),
-          const Spacer(),
-          Consumer<OnboardingProvider>(
-            builder: (_, value, __) => CustomTextButton(
-              title: "confirm",
-              onPressed: AppValidators.validatePasscode(
-                        value.passcodeController.text,
-                      ) !=
-                      null
-                  ? null
-                  : () {
-                      if (value.passcodeController.text == "1234") {
-                        value.currentStep = OnboardingSteps.confirm_passcode;
-                        Get.toNamed(Routes.ONBOARDING_CONFIRM_PASSCODE);
-                      } else {
-                        Utils.showSnackbar("Invalid OTP");
-                      }
-                    },
-            ),
           ),
         ],
       ),

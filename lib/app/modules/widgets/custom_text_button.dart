@@ -50,7 +50,7 @@ class CustomTextButton extends StatelessWidget {
                     ? AppColors.kPrimaryColor.withOpacity(.24)
                     : Colors.white.withOpacity(.14);
               }
-      
+
               return null;
             },
           ),
@@ -72,7 +72,7 @@ class CustomTextButton extends StatelessWidget {
               if (states.contains(MaterialState.disabled)) {
                 return AppColors.doveGray;
               }
-      
+
               return buttonColor;
             },
           ),

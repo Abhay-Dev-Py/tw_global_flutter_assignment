@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/common/util/validators.dart';
-import 'package:flutter_getx_template/app/modules/login/view/local_widgets/role_switch_widget.dart';
+import 'package:flutter_getx_template/app/modules/landing/view/local_widgets/role_switch_widget.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_scaffold_widget.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
@@ -100,6 +100,15 @@ class _OnboardingEmailAddressViewState
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: 24.h),
+            Text(
+              "or verify using Google",
+              style: AppTextStyle.regularStyle.copyWith(
+                color: AppColors.blue,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const Spacer(),
             CustomTextButton(

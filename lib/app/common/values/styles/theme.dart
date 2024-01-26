@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppTheme {
   static ThemeData get theme {
@@ -14,7 +15,7 @@ abstract class AppTheme {
 
     return ThemeData(
       brightness: Brightness.light,
-      fontFamily: AppAssets.fonts.manrope,
+      fontFamily: GoogleFonts.manrope().fontFamily,
       primaryColor: AppColors.kPrimaryColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: const AppBarTheme(

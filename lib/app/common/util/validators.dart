@@ -76,6 +76,26 @@ abstract class AppValidators {
     }
   }
 
+  static String? validateIIBFRegistrationNumber(String? iibfNumber) {
+    if (iibfNumber == null || iibfNumber.isEmpty) {
+      return Strings.fieldCantBeEmpty;
+    } else if (!RegExp(r'^[A-Z]{3}[0-9]{7}$').hasMatch(iibfNumber)) {
+      return Strings.enterValidIIBF;
+    } else {
+      return null;
+    }
+  }
+
+  static String? validateIIBFSerial(String? iibfSerial) {
+    if (iibfSerial == null || iibfSerial.isEmpty) {
+      return Strings.fieldCantBeEmpty;
+    } else if (!RegExp(r'^[A-Z]{2}[0-9]{6}$').hasMatch(iibfSerial)) {
+      return Strings.enterValidIIBFSerial;
+    } else {
+      return null;
+    }
+  }
+
   static String? validateOTP(String? v) {
     if (v!.isEmpty) {
       return Strings.fieldCantBeEmpty;

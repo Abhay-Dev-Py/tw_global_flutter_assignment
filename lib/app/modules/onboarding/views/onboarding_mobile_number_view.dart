@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/common/util/validators.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
@@ -52,6 +53,7 @@ class _OnboardingMobileNumberViewState
                 validator: (value) => AppValidators.validatePhone(value),
                 keyboardType: TextInputType.phone,
                 maxLength: 10,
+                textFeildType: TextFeildType.mobile,
               );
             },
           ),
@@ -73,7 +75,10 @@ class _OnboardingMobileNumberViewState
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                  recognizer: TapGestureRecognizer()..onTap = () {},
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Get.toNamed(Routes.SIGN_IN_MOBILE, arguments: Role.agent);
+                    },
                 ),
               ],
             ),

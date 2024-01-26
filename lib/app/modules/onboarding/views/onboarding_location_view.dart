@@ -28,7 +28,7 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
                 height: 80.h,
               ),
               Image.asset(
-                AppAssets.images.onboardingLocation,
+                AppAssets.pngs.onboardingLocation,
                 height: 170.h,
                 width: 248.w,
               ),
@@ -87,8 +87,14 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
                 title: "allow permissions",
                 onPressed: () {
                   Provider.of<OnboardingProvider>(context, listen: false)
-                      .currentStep = OnboardingSteps.enter_mobile_number;
-                  Get.toNamed(Routes.ONBOARDING_MOBILE_NUMBER);
+                      .askLocationPermission()
+                      .then((isGranted) {
+                    if (isGranted) {
+                      Provider.of<OnboardingProvider>(context, listen: false)
+                          .currentStep = OnboardingSteps.enter_mobile_number;
+                      Get.toNamed(Routes.ONBOARDING_MOBILE_NUMBER);
+                    }
+                  });
                 },
               ),
             ],
@@ -97,5 +103,4 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
       ),
     );
   }
-
 }

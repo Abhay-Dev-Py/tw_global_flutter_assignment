@@ -14,21 +14,26 @@ class CustomCheckboxWidget extends FormField<bool> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (v) => AppValidators.validateCheckbox(v: v!),
           builder: (state) {
-            return CheckboxListTile(
-              dense: state.hasError,
-              value: state.value,
-              contentPadding: EdgeInsets.zero,
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: state.didChange,
-              title: titleWidget,
-              subtitle: state.hasError
-                  ? Builder(
-                      builder: (_) => Text(
-                        state.errorText!,
-                        style: TextStyle(color: Theme.of(_).colorScheme.error),
-                      ),
-                    )
-                  : null,
+            return Row(
+              children: [
+                Checkbox(
+                  value: state.value,
+                  onChanged: state.didChange,
+                ),
+                Column(
+                  children: [
+                    titleWidget,
+                    // if (state.hasError)
+                    //   Builder(
+                    //     builder: (_) => Text(
+                    //       state.errorText!,
+                    //       style:
+                    //           TextStyle(color: Theme.of(_).colorScheme.error),
+                    //     ),
+                    //   ),
+                  ],
+                ),
+              ],
             );
           },
         );

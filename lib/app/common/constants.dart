@@ -11,3 +11,26 @@ abstract class Constants {
 }
 
 enum Role { agent, admin }
+
+enum TextFeildType { mobile, password, text }
+
+enum AuthType { mobile, email }
+
+enum ForgotPasswordType { mobile, email }
+
+enum ReviewDetails {
+  full_name,
+  dob,
+  email,
+  mobile_number,
+  pan_number,
+  shop_name,
+  shop_address,
+  city,
+  state,
+  country,
+  iibf_registration_number,
+  serial_number,
+  date_of_certificate_issue,
+  iibf_certificate_photo,
+}

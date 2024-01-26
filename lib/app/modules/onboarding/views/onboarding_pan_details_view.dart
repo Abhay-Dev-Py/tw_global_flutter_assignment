@@ -6,6 +6,7 @@ import 'package:flutter_getx_template/app/modules/widgets/custom_scaffold_widget
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_field_widget.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -53,6 +54,24 @@ class _OnboardingPanDetailsViewState extends State<OnboardingPanDetailsView> {
                 },
                 validator: (value) => AppValidators.validatePAN(value),
                 maxLength: 10,
+                obsecureText: !value.showPanNumber,
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    value.showPanNumber = !value.showPanNumber;
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: SvgPicture.asset(
+                      value.showPanNumber
+                          ? AppAssets.svgs.passwordHideSvg
+                          : AppAssets.svgs.passwordShowSvg,
+                    ),
+                  ),
+                ),
+                suffixIconConstraints: BoxConstraints(
+                  maxHeight: 28.h,
+                  maxWidth: 28.w,
+                ),
               );
             },
           ),
@@ -87,7 +106,7 @@ class _OnboardingPanDetailsViewState extends State<OnboardingPanDetailsView> {
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1900),
-                    lastDate: DateTime(2100),
+                    lastDate: DateTime.now(),
                   );
 
                   value.setDobControllerValue = date?.toIso8601String();

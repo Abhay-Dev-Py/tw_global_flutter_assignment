@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/common/util/validators.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_app_text.dart';
+import 'custom_containter_widget.dart';
+import 'custom_country_picker_widget.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
   final String? labelText, hintText;
@@ -21,6 +25,10 @@ class CustomTextFieldWidget extends StatelessWidget {
   final BoxConstraints? suffixIconConstraints;
   final EdgeInsets? prefixIconPadding;
   final Color? fillColor;
+  final bool showValidation;
+  final String? errorText;
+  final TextFeildType textFeildType;
+  final bool obsecureText;
 
   const CustomTextFieldWidget({
     Key? key,
@@ -49,101 +57,62 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.isDense,
     this.prefixIconPadding,
     this.fillColor,
+    this.showValidation = false,
+    this.errorText,
+    this.textFeildType = TextFeildType.text,
+    this.obsecureText = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = AppTextStyle.regularStyle.copyWith(
-      color: AppColors.mineShaft,
-      fontSize: Dimens.fontSize15,
-    );
-
-    return TextFormField(
-      onTap: onTap,
-      readOnly: readOnly,
-      initialValue: initialValue,
-      keyboardType: keyboardType,
-      autovalidateMode: autovalidateMode,
-      controller: controller,
-      validator: validator,
-      onChanged: onChanged,
-      minLines: minLines,
-      maxLines: maxLines,
-      onSaved: onSaved,
-      enabled: enabled,
-      inputFormatters: maxLength == null
-          ? null
-          : [
-              LengthLimitingTextInputFormatter(maxLength),
-              if (keyboardType == TextInputType.number ||
-                  keyboardType == TextInputType.phone)
-                FilteringTextInputFormatter.digitsOnly,
-            ],
-      decoration: InputDecoration(
-        fillColor: fillColor,
-        filled: fillColor != null,
-        isDense: isDense,
-        border: border ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.0),
-              borderSide: const BorderSide(
-                color: AppColors.blue,
-              ),
-            ),
-        enabledBorder: border ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.0),
-              borderSide: const BorderSide(
-                color: AppColors.doveGray,
-              ),
-            ),
-        focusedBorder: border ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.0),
-              borderSide: const BorderSide(
-                color: AppColors.blue,
-                width: 2,
-              ),
-            ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-          borderSide: const BorderSide(
-            color: AppColors.doveGray,
-            width: 2,
-          ),
+    return TextFieldContainer(
+      type: textFeildType,
+      borderColor: AppColors.lightBlue,
+      prefix:
+          TextFeildType.text == textFeildType ? null : const CountryPickerUI(),
+      labelText: Align(
+        alignment: Alignment.topLeft,
+        child: MyText(
+          color: AppColors.hintInfotextColor,
+          title: labelText ??
+              (TextFeildType.text == textFeildType
+                  ? "Enter email"
+                  : "Enter phone number"),
+          size: 14.sp,
+          fontWeight: FontWeight.w400,
         ),
-        labelText: addHint
+      ),
+      inputField: TextFormField(
+        onTap: onTap,
+        readOnly: readOnly,
+        initialValue: initialValue,
+        keyboardType: keyboardType,
+        autovalidateMode: autovalidateMode,
+        controller: controller,
+        validator: validator,
+        onChanged: onChanged,
+        minLines: minLines,
+        maxLines: obsecureText ? 1 : maxLines,
+        onSaved: onSaved,
+        enabled: enabled,
+        obscureText: obsecureText,
+        inputFormatters: maxLength == null
             ? null
-            : ((controller?.text != null || !readOnly) ? labelText : null),
-        hintText: hintText,
-        prefixIconConstraints: BoxConstraints(
-          maxHeight: 40.h,
-          maxWidth: 40.w,
-        ),
-        prefixIcon: prefixIcon == null
-            ? null
-            : Padding(
-                padding: prefixIconPadding ?? EdgeInsets.only(right: 10.w),
-                child: prefixIcon,
-              ),
-        prefixText: prefixText,
-        suffixText: suffixText,
-        prefixStyle: textStyle,
-        suffixStyle: textStyle,
-        suffixIcon: suffixIcon == null
-            ? null
-            : Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: suffixIcon,
-              ),
-        suffixIconConstraints: suffixIconConstraints ??
-            BoxConstraints(
-              maxHeight: 40.h,
-              maxWidth: 40.w,
-            ),
-        contentPadding: EdgeInsets.symmetric(
-          vertical: 18.h,
-          horizontal: 10.w,
+            : [
+                LengthLimitingTextInputFormatter(maxLength),
+                if (keyboardType == TextInputType.number ||
+                    keyboardType == TextInputType.phone)
+                  FilteringTextInputFormatter.digitsOnly,
+              ],
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.only(left: 0),
+          counterText: "",
+          border: InputBorder.none,
+          hintText: hintText,
+          errorText: showValidation ? errorText : null,
+          errorMaxLines: 3,
+          suffixIcon: suffixIcon,
+          suffixIconConstraints: suffixIconConstraints,
         ),
       ),
     );

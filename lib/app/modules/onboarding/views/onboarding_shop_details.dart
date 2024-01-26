@@ -19,6 +19,13 @@ class OnboardingShopDetailsView extends StatefulWidget {
 
 class _OnboardingShopDetailsViewState extends State<OnboardingShopDetailsView> {
   @override
+  void initState() {
+    Provider.of<OnboardingProvider>(context, listen: false)
+        .initiateShopDetails();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppScaffold(
       body: Column(

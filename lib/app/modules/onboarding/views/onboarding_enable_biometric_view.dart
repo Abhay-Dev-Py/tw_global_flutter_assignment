@@ -1,3 +1,4 @@
+import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
@@ -41,23 +42,30 @@ class _OnboardingEnableBiometricViewState
               SizedBox(height: 90.h),
               Center(
                 child: Image.asset(
-                  AppAssets.images.biometric,
+                  AppAssets.pngs.onboardingBiometric,
                 ),
               ),
             ],
           ),
-          persistentFooterButtons: [
-            Column(
-              children: [
-                CustomTextButton(
-                  title: "enable biometric",
-                  onPressed: () {
+          bottomSheet: Column(
+            children: [
+              CustomTextButton(
+                title: "enable biometric",
+                onPressed: () {
+                  value.enableBiometrics().thenRight((right) async {
                     value.currentStep = OnboardingSteps.enter_pan_details;
                     Get.toNamed(Routes.ONBOARDING_PAN_DETAILS);
-                  },
-                ),
-                SizedBox(height: 20.h),
-                Text(
+                    throw ("");
+                  }).thenLeft((left) => throw (""));
+                },
+              ),
+              SizedBox(height: 20.h),
+              GestureDetector(
+                onTap: () {
+                  value.currentStep = OnboardingSteps.enter_pan_details;
+                  Get.toNamed(Routes.ONBOARDING_PAN_DETAILS);
+                },
+                child: Text(
                   "skip for now",
                   style: AppTextStyle.lightStyle.copyWith(
                     fontWeight: FontWeight.w400,
@@ -65,9 +73,10 @@ class _OnboardingEnableBiometricViewState
                     color: AppColors.blue,
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
+          bottomSheetHeight: 100.h,
         );
       },
     );

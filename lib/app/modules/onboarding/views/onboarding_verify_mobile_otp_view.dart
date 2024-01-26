@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/common/util/validators.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
@@ -19,6 +21,12 @@ class OnboardingVerifyMobileOtpView extends StatefulWidget {
 
 class _OnboardingVerifyMobileOtpViewState
     extends State<OnboardingVerifyMobileOtpView> {
+  @override
+  void initState() {
+    Provider.of<OnboardingProvider>(context, listen: false).startTimer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -54,6 +62,44 @@ class _OnboardingVerifyMobileOtpViewState
                 validator: (value) => AppValidators.validateOTP(value),
                 keyboardType: TextInputType.phone,
                 maxLength: 6,
+                textFeildType: TextFeildType.text,
+              );
+            },
+          ),
+          SizedBox(height: 20.h),
+          Consumer<OnboardingProvider>(
+            builder: (context, value, __) {
+              return Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: value.formattedTime == "0:00"
+                          ? "Didn't receive OTP "
+                          : "Resend OTP in ",
+                      style: AppTextStyle.lightStyle.copyWith(
+                        fontWeight: FontWeight.w200,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    TextSpan(
+                      text: value.formattedTime == "0:00"
+                          ? "now"
+                          : value.formattedTime,
+                      style: AppTextStyle.lightStyle.copyWith(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp,
+                        color: AppColors.blue,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          if (value.formattedTime == "0:00") {
+                            // call the resend api here and start the timer again
+                            value.startTimer();
+                          }
+                        },
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -67,6 +113,7 @@ class _OnboardingVerifyMobileOtpViewState
                       ? null
                       : () {
                           if (value.mobileOTPController.text == "457774") {
+                            value.disposeTimer();
                             value.currentStep =
                                 OnboardingSteps.enter_email_address;
                             Get.toNamed(Routes.ONBOARDING_EMAIL_ADDRESS);
@@ -79,5 +126,11 @@ class _OnboardingVerifyMobileOtpViewState
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Provider.of<OnboardingProvider>(context, listen: false).disposeTimer();
+    super.dispose();
   }
 }
