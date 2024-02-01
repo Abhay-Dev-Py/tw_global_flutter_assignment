@@ -3,6 +3,7 @@ import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,11 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
               ),
               Text(
                 "Welcome to Appreciate!",
-                style: AppTextStyle.boldStyle.copyWith(fontSize: 24.sp),
+                style: TextStyle(
+                  color: AppColors.indigo,
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               SizedBox(
                 height: 8.h,
@@ -45,9 +50,10 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
               Text(
                 "Access the app by granting these permissions",
                 textAlign: TextAlign.center,
-                style: AppTextStyle.regularStyle.copyWith(
+                style: TextStyle(
                   color: AppColors.indigo,
                   fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(
@@ -56,10 +62,9 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.location_pin,
-                    color: AppColors.blue,
-                    size: 40.r,
+                  SvgPicture.asset(
+                    AppAssets.svgs.locationSvg,
+                    height: 32.h,
                   ),
                   SizedBox(
                     width: 8.w,
@@ -70,12 +75,20 @@ class _OnboardingLocationViewState extends State<OnboardingLocationView> {
                       children: [
                         Text(
                           "Location",
-                          style: AppTextStyle.body2.copyWith(),
+                          style: TextStyle(
+                            color: AppColors.indigo,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
+                        SizedBox(height: 4.h),
                         Text(
                           "We access your location during signup to prevent suspicious account activity",
-                          style: AppTextStyle.lightStyle
-                              .copyWith(fontWeight: FontWeight.w200),
+                          style: TextStyle(
+                            color: AppColors.hintInfotextColor,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ],
                     ),

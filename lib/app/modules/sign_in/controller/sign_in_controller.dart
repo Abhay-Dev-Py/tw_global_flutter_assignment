@@ -5,7 +5,7 @@ import 'package:flutter_getx_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class SignInProvider extends ChangeNotifier {
-  bool _isBiometricAllowed = false;
+  bool _isBiometricAllowed = true;
   bool get isBiometricAllowed => this._isBiometricAllowed;
 
   set isBiometricAllowed(bool value) => this._isBiometricAllowed = value;
@@ -69,13 +69,13 @@ class SignInProvider extends ChangeNotifier {
   }
 
   Future<void> useBiometrics() async {
-    // if (isBiometricAllowed) {
-    //   // ask for auth and proceed to dashboard if ok
-    //   await OnboardingProvider().enableBiometrics().thenRight((right) async {
-    //     Get.offAndToNamed(Routes.AGENT_DASHBOARD);
-    //     throw ("");
-    //   }).thenLeft((left) => throw (""));
-    // }
+    if (isBiometricAllowed) {
+      // ask for auth and proceed to dashboard if ok
+      await OnboardingProvider().enableBiometrics().thenRight((right) async {
+        Get.offAndToNamed(Routes.AGENT_DASHBOARD);
+        throw ("");
+      }).thenLeft((left) => throw (""));
+    }
     await OnboardingProvider().enableBiometrics().thenRight((right) async {
       Get.offAndToNamed(Routes.AGENT_DASHBOARD);
       throw ("");

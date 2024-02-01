@@ -80,12 +80,13 @@ class CustomTextButton extends StatelessWidget {
         child: child ??
             Text(
               title!,
-              style: AppTextStyle.buttonTextStyle.copyWith(
-                fontSize: textFontSize ?? Dimens.fontSize16,
+              style: TextStyle(
                 color: buttonColor == Colors.white ||
                         buttonColor == Colors.transparent
                     ? AppColors.kPrimaryColor
                     : Colors.white,
+                fontSize: textFontSize ?? 14.sp,
+                fontWeight: FontWeight.w500,
               ),
             ),
       ),

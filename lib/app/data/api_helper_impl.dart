@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:either_dart/either.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/storage/storage.dart';
+
 import 'package:get/get.dart';
 
 import 'api_helper.dart';
@@ -71,17 +72,17 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
   }
 
   @override
-  Either<Exception, Future<Response>> postRequest(
+  Future<Either<Exception, Response>> postRequest(
     String? url,
     dynamic body, {
     String? contentType,
     Map<String, String>? headers,
     Map<String, dynamic>? query,
     dynamic Function(double)? uploadProgress,
-  }) {
+  }) async {
     try {
       return Right(
-        post(
+        await post(
           url,
           body,
           contentType: contentType,
@@ -98,17 +99,17 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
   }
 
   @override
-  Either<Exception, Future<Response>> putRequest(
+  Future<Either<Exception, Response>> putRequest(
     String url,
     dynamic body, {
     String? contentType,
     Map<String, String>? headers,
     Map<String, dynamic>? query,
     dynamic Function(double)? uploadProgress,
-  }) {
+  }) async {
     try {
       return Right(
-        put(
+        await put(
           url,
           body,
           contentType: contentType,
@@ -125,15 +126,15 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
   }
 
   @override
-  Either<Exception, Future<Response>> deleteRequest(
+  Future<Either<Exception, Response>> deleteRequest(
     String url, {
     Map<String, String>? headers,
     String? contentType,
     Map<String, dynamic>? query,
-  }) {
+  }) async {
     try {
       return Right(
-        delete(
+       await delete(
           url,
           headers: headers,
           contentType: contentType,

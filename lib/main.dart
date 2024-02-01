@@ -3,7 +3,8 @@ import 'package:flutter_getx_template/app/common/providers/passcode_provider.dar
 import 'package:flutter_getx_template/app/common/util/initializer.dart';
 import 'package:flutter_getx_template/app/data/services/navigation_service.dart';
 import 'package:flutter_getx_template/app/localizations/localization_provider.dart';
-import 'package:flutter_getx_template/app/modules/dashboard/controller/dashboard_controller.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/controller/admin_dashboard_controller.dart';
+import 'package:flutter_getx_template/app/modules/agent_dashboard/controller/agent_dashboard_controller.dart';
 import 'package:flutter_getx_template/app/modules/landing/controller/landing_controller.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
 import 'package:flutter_getx_template/app/modules/sign_in/controller/sign_in_controller.dart';
@@ -22,9 +23,14 @@ void main() {
   // model.panDetails.dateOfBirth = "25-01-2000";
   // model.panDetails.panNumber = "FGGPR7614C";
   // setOnboardingModel = model;
-  Initializer.init(() {
-    runApp(const MyApp());
-  });
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+  //   (value) => Initializer.init(() {
+      
+  //   }),
+  // );
+  runApp(const MyApp());
+
   InitialBindings().dependencies();
 }
 
@@ -53,9 +59,7 @@ class _MyAppState extends State<MyApp> {
           getPages: AppPages.routes,
           navigatorKey: AppNavigation.navigatorKey,
           // routerConfig: AppPages.goRoutes,
-          builder: (_, child) => BaseWidget(
-            child: child ?? const SizedBox.shrink(),
-          ),
+          builder: (_, child) => child ?? const SizedBox.shrink(),
         ),
       ),
     );
@@ -75,8 +79,11 @@ class _MyAppState extends State<MyApp> {
       ChangeNotifierProvider<SignInProvider>(
         create: (context) => SignInProvider(),
       ),
-      ChangeNotifierProvider<DashboardProvider>(
-        create: (context) => DashboardProvider(),
+      ChangeNotifierProvider<AgentDashboardProvider>(
+        create: (context) => AgentDashboardProvider(),
+      ),
+      ChangeNotifierProvider<AdminDashboardProvider>(
+        create: (context) => AdminDashboardProvider(),
       ),
     ];
   }

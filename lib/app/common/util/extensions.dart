@@ -12,6 +12,16 @@ import 'loading_dialog.dart';
 
 abstract class Extensions {}
 
+extension MaskedString on String {
+  String maskCharacters({int prefixLength = 6}) {
+    if (prefixLength >= this.length) {
+      return 'X' * this.length;
+    }
+    String masked = 'X' * (this.length - prefixLength);
+    return masked + this.substring(this.length - prefixLength);
+  }
+}
+
 extension BorderRadiusExt on num {
   BorderRadius get borderRadius => BorderRadius.circular(this.r);
 

@@ -41,10 +41,8 @@ dependencies:
 
   octo_image: ^1.0.1
   either_dart: ^1.0.0
-  json_serializable: ^6.7.1
   modal_progress_hud_nsn: ^0.4.0
   flutter_svg: ^2.0.9
-  vector_graphics: ^1.1.9+2
   provider: ^6.1.1
   google_fonts: ^6.1.0
   permission_handler: ^11.1.0
@@ -52,6 +50,9 @@ dependencies:
   lottie: ^3.0.0
   local_auth: ^2.1.8
   responsive_framework: ^1.1.1
+  open_file_plus: ^3.4.1
+  dio: ^5.4.0
+  
 
 dev_dependencies:
   flutter_test:
@@ -69,13 +70,14 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/google_fonts/
     - assets/pngs/common/
     - assets/pngs/dashboard/
     - assets/pngs/onboarding/
     - assets/pngs/sign_in/
     - assets/svgs/
     - assets/svgs/common/
+    - assets/svgs/dashboard/
+    - assets/svgs/onboarding/
     - assets/lottie_animations/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

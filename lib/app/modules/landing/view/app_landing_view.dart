@@ -45,19 +45,9 @@ class _AppLandingViewState extends State<AppLandingView> {
                             ? AgentInfoWidget(
                                 onGetStarted: (Role role) {
                                   loginProvider.onGetStarted(role: role);
-                                  // AppNavigation.navigatorKey.currentContext!.
-                                  // context.goNamed(Routes.ONBOARDING_LOCATION);
                                 },
                                 onSignIn: (Role role) {
                                   loginProvider.onSignIn(role);
-                                  
-                                  // var locale = const Locale('hi', 'IN');
-                                  // Get.updateLocale(locale);
-                                  // if (languageProvider.currentLanguage == Languages.english) {
-                                  //   languageProvider.setCurrentLanguage = Languages.hindi;
-                                  // } else {
-                                  //   languageProvider.setCurrentLanguage = Languages.english;
-                                  // }
                                 },
                               )
                             : AdminInfoWidget(

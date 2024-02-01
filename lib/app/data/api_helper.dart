@@ -14,7 +14,7 @@ abstract class ApiHelper {
     Map<String, dynamic>? query,
   });
 
-  Either<Exception,Future<Response>> postRequest(
+  Future<Either<Exception,Response>> postRequest(
     String? url,
     dynamic body, {
     String? contentType,
@@ -23,7 +23,7 @@ abstract class ApiHelper {
     dynamic Function(double)? uploadProgress,
   });
 
-  Either<Exception,Future<Response>> putRequest(
+  Future<Either<Exception,Response>> putRequest(
     String url,
     dynamic body, {
     String? contentType,
@@ -32,7 +32,7 @@ abstract class ApiHelper {
     dynamic Function(double)? uploadProgress,
   });
 
-  Either<Exception,Future<Response>> deleteRequest(
+  Future<Either<Exception,Response>> deleteRequest(
     String url, {
     Map<String, String>? headers,
     String? contentType,

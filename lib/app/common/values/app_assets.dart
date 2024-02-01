@@ -31,6 +31,7 @@ class _AppPngs {
   final String commonCancelNumber = '$_pngsCommon/cancel_number.png';
   final String commonPasswordHide = '$_pngsCommon/password_hide.png';
   final String commonPasswordShow = '$_pngsCommon/password_show.png';
+  final String commonEdit = '$_pngsCommon/edit.png';
 
   /// Onboarding PNG
   final String onboardingLocation = '$_pngsOnboarding/onboarding_location.png';
@@ -39,6 +40,11 @@ class _AppPngs {
   /// dashboard PNG
   final String dashboardDocument = '$_pngsDashboard/dashboard_document.png';
   final String dashboardDocumentFail = '$_pngsDashboard/document_fail.png';
+  final String dashboardAadhaarPlaceholder =
+      '$_pngsDashboard/aadhaar_placeholder.png';
+  final String dashboardPanPlaceholder = '$_pngsDashboard/pan_placeholder.png';
+  final String dashboardCertificatePlaceholder =
+      '$_pngsDashboard/certificate_placeholder.png';
 
   /// Sign in PNG
   final String signInPasscodeBanner =
@@ -50,6 +56,8 @@ class _AppPngs {
 class _AppSvgs {
   static const String _baseSvgUrl = "assets/svgs";
   static const String _baseCommonUrl = "$_baseSvgUrl/common";
+  static const String _baseDashboardUrl = "$_baseSvgUrl/dashboard";
+  static const String _baseOnboardingUrl = "$_baseSvgUrl/onboarding";
 
   ///add app svgs here
   final String loginBg = '$_baseSvgUrl/login_bg.svg';
@@ -60,6 +68,13 @@ class _AppSvgs {
   final String passwordHideSvg = '$_baseCommonUrl/password_hide.svg';
   final String attachmentPinSvg = '$_baseCommonUrl/attachment_pin.svg';
   final String editIconSvg = '$_baseCommonUrl/edit_icon.svg';
+
+  // Dashboard svgs
+  final String threeLineColumnSvg = '$_baseDashboardUrl/three_lines_column.svg';
+  final String searchSvg = '$_baseDashboardUrl/search.svg';
+
+  // Onboarding svgs
+  final String locationSvg = '$_baseOnboardingUrl/location.svg';
 }
 
 class AppAssets {

@@ -24,14 +24,19 @@ class AgentInfoWidget extends StatelessWidget {
       children: [
         Text(
           "Become Our\nKYC Agent",
-          style: AppTextStyle.boldStyle.copyWith(fontSize: 24.sp),
+          style: TextStyle(
+            color: AppColors.indigo,
+            fontSize: 24.sp,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         SizedBox(height: 20.h),
         Text(
           OnboardingStrings.startOfferingAppreciate.tr,
-          style: AppTextStyle.regularStyle.copyWith(
-            color: AppColors.indigo,
+          style: TextStyle(
+            color: AppColors.hintInfotextColor,
             fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
           ),
         ),
         SizedBox(height: 20.h),
@@ -47,9 +52,10 @@ class AgentInfoWidget extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "Have an account? ",
-                  style: AppTextStyle.regularStyle.copyWith(
-                    color: AppColors.indigo,
+                  style: TextStyle(
+                    color: AppColors.hintInfotextColor,
                     fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 TextSpan(

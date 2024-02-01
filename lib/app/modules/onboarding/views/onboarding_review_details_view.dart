@@ -123,7 +123,7 @@ class _OnboardingEmailAddressViewState
           detailsRowWidget(
             left: "Date of birth",
             right: getOnboardingModel.panDetails.dateOfBirth ?? "",
-            isEditable: !isEditable,
+            isEditable: false,
             detail: ReviewDetails.dob,
           ),
           detailsRowWidget(
@@ -141,7 +141,7 @@ class _OnboardingEmailAddressViewState
           detailsRowWidget(
             left: "PAN Number",
             right: getOnboardingModel.panDetails.panNumber ?? "",
-            isEditable: !isEditable,
+            isEditable: false,
             isDividerRequired: false,
             detail: ReviewDetails.pan_number,
           ),
@@ -280,7 +280,11 @@ class _OnboardingEmailAddressViewState
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: MyText(
-                          title: isView ? "view" : right,
+                          title: isView
+                              ? "view"
+                              : detail == ReviewDetails.pan_number
+                                  ? right.maskCharacters()
+                                  : right,
                           color: isView ? AppColors.blue : AppColors.indigo,
                           size: 14.sp,
                           fontWeight: FontWeight.w500,

@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/common/util/media_utils.dart';
 import 'package:flutter_getx_template/app/common/util/validators.dart';
-import 'package:flutter_getx_template/app/modules/dashboard/controller/dashboard_controller.dart';
+import 'package:flutter_getx_template/app/modules/agent_dashboard/controller/agent_dashboard_controller.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_app_text.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_bottom_sheets.dart';
@@ -187,10 +190,11 @@ class _OnboardingIIBFCertificateDetailsViewState
                         ? null
                         : () {
                             // set certificate uploaded to true,
-                            Provider.of<DashboardProvider>(
+                            Provider.of<AgentDashboardProvider>(
                               context,
                               listen: false,
-                            ).isCertificateUploaded = true;
+                            ).agentStatus =
+                                AgentOnboardingStatus.upload_iibf_certificate;
                             value.currentStep = OnboardingSteps.review_details;
                             Get.toNamed(Routes.ONBOARDING_REVIEW_DETAILS);
                           },
@@ -268,11 +272,11 @@ class _OnboardingIIBFCertificateDetailsViewState
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: (isloading)
+                    // ignore: dead_code
                     ? const Center(child: CircularProgressIndicator())
                     : Column(
                         children: [
                           buildMenuItem(
-                            // Assets.assets_mini_modules_take_photo_png,
                             SvgPicture.asset(
                               AppAssets.svgs.cameraSvg,
                             ),
@@ -284,12 +288,20 @@ class _OnboardingIIBFCertificateDetailsViewState
                             color: AppColors.lightGrey,
                           ),
                           buildMenuItem(
-                            // Assets.assets_mini_modules_select_photo_png,
                             SvgPicture.asset(
                               AppAssets.svgs.selectPhotoSvg,
                             ),
                             "Select a photo",
-                            () => AppMediaUtils.pickImage(ImageSource.gallery),
+                            () async {
+                              File? certificatePath =
+                                  await AppMediaUtils.pickImage(
+                                ImageSource.gallery,
+                              );
+                              if (certificatePath != null) {
+                                // certificate uploaded
+                                // OpenFile.open(certificatePath.path);
+                              }
+                            },
                           ),
                         ],
                       ),

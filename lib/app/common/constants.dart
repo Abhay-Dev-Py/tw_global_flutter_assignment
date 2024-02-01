@@ -1,5 +1,7 @@
 abstract class Constants {
-  static const String baseUrl = String.fromEnvironment('B');
+  // static const String baseUrl = String.fromEnvironment('B');
+  static const String baseUrl =
+      "https://appreciate-otp-module-dev.pacewisdom.in/v2";
 
   static const timeout = Duration(seconds: 5);
   static const String token = 'authToken';
@@ -33,4 +35,18 @@ enum ReviewDetails {
   serial_number,
   date_of_certificate_issue,
   iibf_certificate_photo,
+}
+
+enum AgentOnboardingStatus {
+  upload_iibf_certificate,
+  admin_to_be_assigned,
+  admin_assigned,
+  verification_started,
+  verification_completed,
+}
+
+enum AdminSelectedTab {
+  pending,
+  in_progress,
+  verififed,
 }

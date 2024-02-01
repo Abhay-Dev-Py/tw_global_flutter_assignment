@@ -24,6 +24,7 @@ class _OnboardingMobileNumberViewState
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      isBackEnabled: false,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -35,9 +36,10 @@ class _OnboardingMobileNumberViewState
           SizedBox(height: 8.h),
           Text(
             "Enter your mobile number",
-            style: AppTextStyle.lightStyle.copyWith(
-              fontWeight: FontWeight.w200,
+            style: TextStyle(
+              color: AppColors.hintInfotextColor,
               fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
             ),
           ),
           SizedBox(height: 10.h),
@@ -63,9 +65,10 @@ class _OnboardingMobileNumberViewState
               children: [
                 TextSpan(
                   text: "Have an account? ",
-                  style: AppTextStyle.lightStyle.copyWith(
-                    fontWeight: FontWeight.w200,
+                  style: TextStyle(
+                    color: AppColors.hintInfotextColor,
                     fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 TextSpan(
@@ -87,15 +90,11 @@ class _OnboardingMobileNumberViewState
           Consumer<OnboardingProvider>(
             builder: (_, value, __) => CustomTextButton(
               title: "sign up with OTP",
-              onPressed: AppValidators.validatePhone(
-                        value.mobileNumberController.text,
-                      ) !=
-                      null
-                  ? null
-                  : () {
-                      value.currentStep = OnboardingSteps.verify_mobile_otp;
-                      Get.toNamed(Routes.ONBOARDING_VERIFY_MOBILE_OTP);
-                    },
+              onPressed: () {
+                value.sendMobileOtp();
+                // value.currentStep = OnboardingSteps.verify_mobile_otp;
+                // Get.toNamed(Routes.ONBOARDING_VERIFY_MOBILE_OTP);
+              },
             ),
           ),
         ],

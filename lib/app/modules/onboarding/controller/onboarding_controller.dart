@@ -6,6 +6,7 @@ import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/models/agent_onboarding_model.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/data/services/navigation_service.dart';
+import 'package:flutter_getx_template/app/modules/onboarding/service/onboarding_services.dart';
 import 'package:intl/intl.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -28,6 +29,7 @@ enum OnboardingSteps {
 }
 
 class OnboardingProvider extends ChangeNotifier {
+  final OnboardingServices _service = OnboardingServices();
   AgentOnboardingModel onboardingModel = getOnboardingModel;
   OnboardingSteps _currentStep = OnboardingSteps.location_permission;
 
@@ -96,6 +98,13 @@ class OnboardingProvider extends ChangeNotifier {
   set setMobileOTPControllerValue(String value) {
     this._mobileOTPController.text = value;
     notifyListeners();
+  }
+
+  Future<bool> sendMobileOtp() async {
+    await _service.sendMobileOtp(
+      mobileNumber: "+917016131818",
+    );
+    return false;
   }
 
   // Mobile Number View Logics -- End

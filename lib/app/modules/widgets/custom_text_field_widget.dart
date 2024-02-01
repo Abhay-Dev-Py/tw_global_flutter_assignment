@@ -118,3 +118,86 @@ class CustomTextFieldWidget extends StatelessWidget {
     );
   }
 }
+
+class CustomOtpWidget extends StatefulWidget {
+  const CustomOtpWidget({Key? key}) : super(key: key);
+
+  @override
+  State<CustomOtpWidget> createState() => _CustomOtpWidgetState();
+}
+
+class _CustomOtpWidgetState extends State<CustomOtpWidget> {
+  final List<String> _otpNumberList = List.generate(6, (index) => "-");
+
+  final List<TextEditingController> _controllers =
+      List.generate(6, (index) => TextEditingController());
+
+  final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = 0; i < 6; i++) {
+      _controllers[i].addListener(() {
+        if (_controllers[i].text.isNotEmpty && i < 5) {
+          FocusScope.of(context).requestFocus(_focusNodes[i + 1]);
+        } else if (_controllers[i].text.isEmpty && i > 0) {
+          FocusScope.of(context).requestFocus(_focusNodes[i - 1]);
+        }
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(
+        _otpNumberList.length,
+        (index) => Container(
+          height: 40.h,
+          width: 44.w,
+          decoration: ShapeDecoration(
+            color: AppColors.white,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 1.r,
+                color: AppColors.lightBlue,
+              ),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
+          child: Center(
+            child: TextFormField(
+              controller: _controllers[index],
+              decoration: const InputDecoration(
+                hintText: "  -",
+                counterText: "",
+              ),
+              onChanged: (_) {
+                // RegExp r = RegExp(r'^[^0-9]*([0-9]){1}[^0-9]*$');
+                // if (r.hasMatch(_)) {
+                //   _otpNumberControllerList[index].text = "  $_";
+                // }
+              },
+              maxLength: 1,
+              keyboardType: TextInputType.number,
+              focusNode: _focusNodes[index],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
+    super.dispose();
+  }
+}

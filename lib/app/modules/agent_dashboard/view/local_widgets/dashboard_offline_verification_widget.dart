@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_template/app/common/util/exports.dart';
+import 'package:flutter_getx_template/app/modules/widgets/base_widget.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -19,19 +19,29 @@ class OfflineVerification extends StatelessWidget {
           SizedBox(height: 26.h),
           Text(
             "Complete offline verification",
-            style: AppTextStyle.headline6.copyWith(
-              fontSize: Dimens.fontSize22,
+            style: TextStyle(
+              color: AppColors.indigo,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w800,
             ),
           ),
           if (!isAdminAssigned)
             Text(
               "Soon an admin will be assigned to for offline verification.",
-              style: AppTextStyle.body2,
+              style: TextStyle(
+                color: AppColors.indigo,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           if (!isAdminAssigned) SizedBox(height: 32.h),
           Text(
             "Please keep the following documents ready for verification",
-            style: AppTextStyle.body2,
+            style: TextStyle(
+              color: AppColors.indigo,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+            ),
           ),
           SizedBox(height: 12.h),
           Row(
@@ -46,12 +56,19 @@ class OfflineVerification extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Image.asset(
-                        AppAssets.pngs.dashboardDocumentFail,
+                        AppAssets.pngs.dashboardPanPlaceholder,
                       ),
                     ),
                   ),
                   SizedBox(height: 8.h),
-                  const Text("PAN Card"),
+                  Text(
+                    "PAN Card",
+                    style: TextStyle(
+                      color: AppColors.indigo,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ],
               ),
               Column(
@@ -63,12 +80,19 @@ class OfflineVerification extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Image.asset(
-                        AppAssets.pngs.dashboardDocumentFail,
+                        AppAssets.pngs.dashboardAadhaarPlaceholder,
                       ),
                     ),
                   ),
                   SizedBox(height: 8.h),
-                  const Text("Aadhar Card"),
+                  Text(
+                    "Aadhar Card",
+                    style: TextStyle(
+                      color: AppColors.indigo,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ],
               ),
               Column(
@@ -80,95 +104,82 @@ class OfflineVerification extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Image.asset(
-                        AppAssets.pngs.dashboardDocumentFail,
+                        AppAssets.pngs.dashboardCertificatePlaceholder,
                       ),
                     ),
                   ),
                   SizedBox(height: 8.h),
-                  const Text("IIBF Certificate"),
+                  Text(
+                    "IIBF Certificate",
+                    style: TextStyle(
+                      color: AppColors.indigo,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
           SizedBox(height: 32.h),
           if (isAdminAssigned)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "ADMIN NAME",
-                  style: AppTextStyle.body2,
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  "Komal Singhania",
-                  style: AppTextStyle.headline6.copyWith(
-                    fontSize: Dimens.fontSize22,
-                  ),
-                ),
-                SizedBox(height: 20.h),
-              ],
+            titleSubtitleWidget(
+              title: "ADMIN NAME",
+              subtitle: "Komal Sinhania",
             ),
           if (isAdminAssigned)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "MOBILE NUMBER",
-                  style: AppTextStyle.body2,
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  "9230929392",
-                  style: AppTextStyle.headline6.copyWith(
-                    fontSize: Dimens.fontSize22,
+            titleSubtitleWidget(
+              title: "MOBILE NUMBER",
+              subtitle: "9230929392",
+              button: Container(
+                width: 76.w,
+                height: 36.h,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(
+                    12.r,
                   ),
                 ),
-                SizedBox(height: 8.h),
-                Container(
-                  width: 76.w,
-                  height: 36.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(
-                      12.r,
+                padding: EdgeInsets.symmetric(
+                  vertical: 8.h,
+                  horizontal: 12.w,
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.call,
+                      color: AppColors.blue,
                     ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.h,
-                    horizontal: 12.w,
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.call,
+                    Text(
+                      " call",
+                      style: AppTextStyle.regularStyle.copyWith(
                         color: AppColors.blue,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
                       ),
-                      Text(
-                        " call",
-                        style: AppTextStyle.regularStyle.copyWith(
-                          color: AppColors.blue,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20.h),
-              ],
+              ),
             ),
           Text(
             isAdminAssigned
                 ? "DATE AND TIME"
                 : "Selected date for time and verification",
-            style: AppTextStyle.body2,
+            style: TextStyle(
+              color: AppColors.hintInfotextColor,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              height: 0,
+            ),
           ),
           SizedBox(height: 8.h),
           Text(
             "Tomorrow 22 Sep, 12:30 AM",
-            style: AppTextStyle.headline6.copyWith(
-              fontSize: Dimens.fontSize22,
+            style: TextStyle(
+              color: AppColors.indigo,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: 8.h),
@@ -196,10 +207,7 @@ class OfflineVerification extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(
-                    Icons.edit,
-                    color: AppColors.blue,
-                  ),
+                  Image.asset(AppAssets.pngs.commonEdit),
                   Text(
                     " edit",
                     style: AppTextStyle.regularStyle.copyWith(

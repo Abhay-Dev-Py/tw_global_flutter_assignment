@@ -1,11 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
-import 'package:flutter_getx_template/app/modules/widgets/custom_app_text.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DashboardHeader extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final bool isNotificationBellRequired;
   const DashboardHeader({
     Key? key,
+    required this.title,
+    required this.subtitle,
+    this.isNotificationBellRequired = true,
   }) : super(key: key);
 
   @override
@@ -24,10 +29,7 @@ class DashboardHeader extends StatelessWidget {
               child: CircleAvatar(
                 radius: 10.r,
                 backgroundColor: AppColors.white,
-                child: const Icon(
-                  Icons.arrow_right_alt_rounded,
-                  color: AppColors.black,
-                ),
+                child: SvgPicture.asset(AppAssets.svgs.threeLineColumnSvg),
               ),
             ),
           ],
@@ -37,17 +39,25 @@ class DashboardHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hi Santosh",
-              style: AppTextStyle.headline6,
+              title,
+              style: TextStyle(
+                color: AppColors.indigo,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w800,
+              ),
             ),
-            const MyText(
-              title: "KYC Point, HSR Layout",
-              color: AppColors.hintInfotextColor,
+            Text(
+              subtitle,
+              style: TextStyle(
+                color: AppColors.hintInfotextColor,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ],
         ),
-        const Spacer(),
-        CircleAvatar(
+        if(isNotificationBellRequired) const Spacer(),
+       if(isNotificationBellRequired) CircleAvatar(
           radius: 20.r,
           backgroundColor: AppColors.lightBlue,
           child: Icon(

@@ -20,14 +20,19 @@ class AdminInfoWidget extends StatelessWidget {
         SizedBox(height: 46.h),
         Text(
           "Welcome back",
-          style: AppTextStyle.boldStyle.copyWith(fontSize: 24.sp),
+          style: TextStyle(
+            color: AppColors.indigo,
+            fontSize: 24.sp,
+            fontWeight: FontWeight.w800,
+          ),
         ),
         SizedBox(height: 20.h),
         Text(
           "Sign in to start Agent Verification",
-          style: AppTextStyle.regularStyle.copyWith(
-            color: AppColors.indigo,
+          style: TextStyle(
+            color: AppColors.hintInfotextColor,
             fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
           ),
         ),
         SizedBox(height: 20.h),

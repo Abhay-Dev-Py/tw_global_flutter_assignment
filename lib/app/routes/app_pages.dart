@@ -1,6 +1,6 @@
 import 'package:flutter_getx_template/app/data/services/navigation_service.dart';
-import 'package:flutter_getx_template/app/modules/dashboard/view/admin_dashboard_view.dart';
-import 'package:flutter_getx_template/app/modules/dashboard/view/agent_dashboard_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_dashboard_view.dart';
+import 'package:flutter_getx_template/app/modules/agent_dashboard/view/agent_dashboard_view.dart';
 import 'package:flutter_getx_template/app/modules/landing/view/app_landing_view.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_confirm_passcode_view.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_email_address_view.dart';
@@ -26,7 +26,7 @@ part 'app_routes.dart';
 abstract class AppPages {
   const AppPages._();
 
-  static const INITIAL = Routes.AGENT_DASHBOARD;
+  static const INITIAL = Routes.ONBOARDING_MOBILE_NUMBER;
 
   static final routes = [
     GetPage(
