@@ -23,29 +23,29 @@ class _OnboardingMobileNumberViewState
     extends State<OnboardingMobileNumberView> {
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      isBackEnabled: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20.h),
-          Text(
-            "Hello",
-            style: AppTextStyle.boldStyle.copyWith(fontSize: 28.sp),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            "Enter your mobile number",
-            style: TextStyle(
-              color: AppColors.hintInfotextColor,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          SizedBox(height: 10.h),
-          Consumer<OnboardingProvider>(
-            builder: (context, value, _) {
-              return CustomTextFieldWidget(
+    return Consumer<OnboardingProvider>(
+      builder: (context, value, __) {
+        return AppScaffold(
+          inAsyncCall: value.inAsyncCall,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20.h),
+              Text(
+                "Hello",
+                style: AppTextStyle.boldStyle.copyWith(fontSize: 28.sp),
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                "Enter your mobile number",
+                style: TextStyle(
+                  color: AppColors.hintInfotextColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              SizedBox(height: 10.h),
+              CustomTextFieldWidget(
                 labelText: "Enter mobile number",
                 controller: value.mobileNumberController,
                 onChanged: (updatedText) {
@@ -56,49 +56,59 @@ class _OnboardingMobileNumberViewState
                 keyboardType: TextInputType.phone,
                 maxLength: 10,
                 textFeildType: TextFeildType.mobile,
-              );
-            },
-          ),
-          SizedBox(height: 10.h),
-          Text.rich(
-            TextSpan(
-              children: [
+              ),
+              SizedBox(height: 10.h),
+              Text.rich(
                 TextSpan(
-                  text: "Have an account? ",
-                  style: TextStyle(
-                    color: AppColors.hintInfotextColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  children: [
+                    TextSpan(
+                      text: "Have an account? ",
+                      style: TextStyle(
+                        color: AppColors.hintInfotextColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "sign in",
+                      style: AppTextStyle.regularStyle.copyWith(
+                        color: AppColors.blue,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Get.toNamed(
+                            Routes.SIGN_IN_MOBILE,
+                            arguments: Role.agent,
+                          );
+                        },
+                    ),
+                  ],
                 ),
-                TextSpan(
-                  text: "sign in",
-                  style: AppTextStyle.regularStyle.copyWith(
-                    color: AppColors.blue,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Get.toNamed(Routes.SIGN_IN_MOBILE, arguments: Role.agent);
-                    },
+              ),
+              const Spacer(),
+              Consumer<OnboardingProvider>(
+                builder: (_, value, __) => CustomTextButton(
+                  title: "sign up with OTP",
+                  onPressed: AppValidators.validatePhone(
+                            value.mobileNumberController.text,
+                          ) !=
+                          null
+                      ? null
+                      : () async {
+                          if (await value.sendMobileOtp()) {
+                            value.currentStep =
+                                OnboardingSteps.verify_mobile_otp;
+                            Get.toNamed(Routes.ONBOARDING_VERIFY_MOBILE_OTP);
+                          }
+                        },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const Spacer(),
-          Consumer<OnboardingProvider>(
-            builder: (_, value, __) => CustomTextButton(
-              title: "sign up with OTP",
-              onPressed: () {
-                value.sendMobileOtp();
-                // value.currentStep = OnboardingSteps.verify_mobile_otp;
-                // Get.toNamed(Routes.ONBOARDING_VERIFY_MOBILE_OTP);
-              },
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

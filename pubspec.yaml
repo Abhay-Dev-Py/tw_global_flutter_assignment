@@ -52,7 +52,9 @@ dependencies:
   responsive_framework: ^1.1.1
   open_file_plus: ^3.4.1
   dio: ^5.4.0
-  
+  flutter_otp_text_field: ^1.1.1
+  url_launcher: ^6.2.4
+  mobkit_dashed_border: ^0.0.5
 
 dev_dependencies:
   flutter_test:

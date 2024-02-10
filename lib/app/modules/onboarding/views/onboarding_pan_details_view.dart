@@ -22,6 +22,8 @@ class _OnboardingPanDetailsViewState extends State<OnboardingPanDetailsView> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      isBackEnabled: false,
+      isFromAgentOnboarding: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,7 +64,7 @@ class _OnboardingPanDetailsViewState extends State<OnboardingPanDetailsView> {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 12.h),
                     child: SvgPicture.asset(
-                      value.showPanNumber
+                      !value.showPanNumber
                           ? AppAssets.svgs.passwordHideSvg
                           : AppAssets.svgs.passwordShowSvg,
                     ),

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/controller/admin_dashboard_controller.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/local_widgets/admin_tab_view_widget.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/local_widgets/agent_request_card_widget.dart';
 import 'package:flutter_getx_template/app/modules/agent_dashboard/view/local_widgets/dashboard_header_widget.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_scaffold_widget.dart';
+import 'package:flutter_getx_template/app/routes/app_pages.dart';
+import 'package:get/get.dart';
+
 import 'package:provider/provider.dart';
 
 class AdminDashboardView extends StatefulWidget {
@@ -17,7 +22,7 @@ class _AdminDashboardViewState extends State<AdminDashboardView> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AdminDashboardProvider>(
-      builder: (context, adminProvider, __) {
+      builder: (context, adminDashboardProvider, __) {
         return AppScaffold(
           isPaddingRequired: false,
           body: Column(
@@ -37,9 +42,7 @@ class _AdminDashboardViewState extends State<AdminDashboardView> {
                   children: [
                     Column(
                       children: [
-                        Container(
-                          height: 8.h,
-                        ),
+                        SizedBox(height: 8.h),
                         Container(
                           height: 0.75.sh,
                           width: double.infinity,
@@ -66,30 +69,49 @@ class _AdminDashboardViewState extends State<AdminDashboardView> {
                               children: [
                                 SizedBox(height: 44.h),
                                 const AdminSearchWidget(),
-                                SizedBox(height: 24.h),
-                                Row(
-                                  children: [
-                                    Text(
-                                      '27 DEC, 12:30 AM',
-                                      style: TextStyle(
-                                        color: AppColors.indigo,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
+                                Expanded(
+                                  child: ListView(
+                                    children: [
+                                      ...List.generate(
+                                        adminDashboardProvider
+                                            .agentRequests.length,
+                                        (index) {
+                                          if (adminDashboardProvider
+                                                  .selectedTab ==
+                                              adminDashboardProvider
+                                                  .agentRequests[index]
+                                                  .adminVerificationStatus) {
+                                            return AgentRequestCard(
+                                              agentModel: adminDashboardProvider
+                                                  .agentRequests[index],
+                                              onAgentRequestTap: () {
+                                                if (adminDashboardProvider
+                                                        .agentRequests[index]
+                                                        .agentVerificationStatus ==
+                                                    AgentVerificationStatus
+                                                        .view_details) {
+                                                  adminDashboardProvider
+                                                          .selectedAgentRequest =
+                                                      index;
+                                                  Get.toNamed(
+                                                    Routes
+                                                        .ADMIN_AGENT_REQUEST_DETAILS,
+                                                    arguments:
+                                                        adminDashboardProvider
+                                                                .agentRequests[
+                                                            index],
+                                                  );
+                                                }
+                                              },
+                                            );
+                                          } else {
+                                            return const SizedBox();
+                                          }
+                                        },
                                       ),
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      'start verification',
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        color: AppColors.blue,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                                const AgentRequestCard(),
                               ],
                             ),
                           ),
@@ -97,7 +119,7 @@ class _AdminDashboardViewState extends State<AdminDashboardView> {
                       ],
                     ),
                     AgentTabViewWidget(
-                      adminProvider: adminProvider,
+                      adminProvider: adminDashboardProvider,
                     ),
                   ],
                 ),
@@ -107,15 +129,6 @@ class _AdminDashboardViewState extends State<AdminDashboardView> {
         );
       },
     );
-  }
-}
-
-class AgentRequestCard extends StatelessWidget {
-  const AgentRequestCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
 

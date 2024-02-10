@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx_template/app/common/models/agent_onboarding_model.dart';
 import 'package:flutter_getx_template/app/common/providers/passcode_provider.dart';
 import 'package:flutter_getx_template/app/common/util/initializer.dart';
 import 'package:flutter_getx_template/app/data/services/navigation_service.dart';

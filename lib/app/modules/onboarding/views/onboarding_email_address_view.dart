@@ -57,6 +57,8 @@ class _OnboardingEmailAddressViewState
                 RoleSwitchWidget(
                   role: "@gmail.com",
                   isSelected: false,
+                  isHighlighted:
+                      value.emailAddressController.text.contains("@gmail.com"),
                   onPressed: (emailExtension) {
                     if (!value.emailAddressController.text.contains("@")) {
                       value.setEmailAddressControllerValue =
@@ -67,11 +69,17 @@ class _OnboardingEmailAddressViewState
                   style: AppTextStyle.lightStyle.copyWith(
                     fontWeight: FontWeight.w200,
                     fontSize: 14.sp,
+                    color:
+                        value.emailAddressController.text.contains("@gmail.com")
+                            ? AppColors.blue
+                            : AppColors.indigo,
                   ),
                 ),
                 RoleSwitchWidget(
                   role: "@yahoo.com",
                   isSelected: false,
+                  isHighlighted:
+                      value.emailAddressController.text.contains("@yahoo.com"),
                   onPressed: (emailExtension) {
                     if (!value.emailAddressController.text.contains("@")) {
                       value.setEmailAddressControllerValue =
@@ -82,11 +90,17 @@ class _OnboardingEmailAddressViewState
                   style: AppTextStyle.lightStyle.copyWith(
                     fontWeight: FontWeight.w200,
                     fontSize: 14.sp,
+                    color:
+                        value.emailAddressController.text.contains("@yahoo.com")
+                            ? AppColors.blue
+                            : AppColors.indigo,
                   ),
                 ),
                 RoleSwitchWidget(
                   role: "@live.com",
                   isSelected: false,
+                  isHighlighted:
+                      value.emailAddressController.text.contains("@live.com"),
                   onPressed: (emailExtension) {
                     if (!value.emailAddressController.text.contains("@")) {
                       value.setEmailAddressControllerValue =
@@ -97,6 +111,10 @@ class _OnboardingEmailAddressViewState
                   style: AppTextStyle.lightStyle.copyWith(
                     fontWeight: FontWeight.w200,
                     fontSize: 14.sp,
+                    color:
+                        value.emailAddressController.text.contains("@live.com")
+                            ? AppColors.blue
+                            : AppColors.indigo,
                   ),
                 ),
               ],

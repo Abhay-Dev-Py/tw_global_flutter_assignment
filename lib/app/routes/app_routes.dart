@@ -21,6 +21,7 @@ abstract class Routes {
   static const ONBOARDING_REVIEW_DETAILS = _Paths.ONBOARDING_REVIEW_DETAILS;
   static const ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION =
       _Paths.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION;
+  static const ONBOARDING_E_SIGN_VIEW = _Paths.ONBOARDING_E_SIGN_VIEW;
   static const ONBOARDING_SUCCESS = _Paths.ONBOARDING_SUCCESS;
 
   static const AGENT_DASHBOARD = _Paths.AGENT_DASHBOARD;
@@ -28,6 +29,15 @@ abstract class Routes {
 
   static const SIGN_IN_MOBILE = _Paths.SIGN_IN_MOBILE;
   static const SIGN_IN_PASSCODE_VERIFY = _Paths.SIGN_IN_PASSCODE_VERIFY;
+
+  static const ADMIN_AGENT_REQUEST_DETAILS = _Paths.ADMIN_AGENT_REQUEST_DETAILS;
+  static const ADMIN_AGENT_OTP_VERIFY = _Paths.ADMIN_AGENT_OTP_VERIFY;
+  static const ADMIN_AGENT_VERIFICATION_STATUS =
+      _Paths.ADMIN_AGENT_VERIFICATION_STATUS;
+  static const PAN_UPLOAD_VIEW = _Paths.PAN_UPLOAD_VIEW;
+  static const PAN_FRONT_VIEW = _Paths.PAN_FRONT_VIEW;
+  static const PAN_REVIEW_VIEW = _Paths.PAN_REVIEW_VIEW;
+  static const PAN_SUBMIT_VIEW = _Paths.PAN_SUBMIT_VIEW;
 }
 
 abstract class _Paths {
@@ -47,6 +57,7 @@ abstract class _Paths {
   static const ONBOARDING_CERTIFICATE_DETAILS =
       '/onboarding_certificate_details';
   static const ONBOARDING_REVIEW_DETAILS = '/onboarding_review_details';
+  static const ONBOARDING_E_SIGN_VIEW = '/onboarding_e_sign_view';
   static const ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION =
       '/onboarding_schedule_offline_verification';
   static const ONBOARDING_SUCCESS = '/onboarding_success';
@@ -56,4 +67,12 @@ abstract class _Paths {
 
   static const SIGN_IN_MOBILE = '/sign_in_mobile';
   static const SIGN_IN_PASSCODE_VERIFY = '/sign_in_passcode_verify';
+  static const ADMIN_AGENT_REQUEST_DETAILS = '/admin_agent_request_details';
+  static const ADMIN_AGENT_OTP_VERIFY = '/admin_agent_otp_verify';
+  static const ADMIN_AGENT_VERIFICATION_STATUS =
+      '/admin_agent_verification_status';
+  static const PAN_UPLOAD_VIEW = '/pan_upload_view';
+  static const PAN_FRONT_VIEW = '/pan_front_view';
+static const PAN_REVIEW_VIEW = '/pan_review_view';
+static const PAN_SUBMIT_VIEW = '/pan_submit_view';
 }

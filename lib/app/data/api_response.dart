@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter_getx_template/app/common/models/api_success_model.dart';
 import 'package:flutter_getx_template/app/common/values/strings.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
@@ -8,7 +9,7 @@ import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'errors/api_error.dart';
 
 abstract class ApiResponse {
-  static T? getResponse<T>(Response<T> response) {
+  static T? _parseResponse<T>(Response<T> response) {
     final status = response.status;
 
     if (status.connectionError) {
@@ -26,9 +27,13 @@ abstract class ApiResponse {
 
       if (response.isOk) {
         if (res is Map) {
-          if (res['errorcode'] != null &&
-              res['errorcode'].toString().isNotEmpty) {
-            if (res['errorcode'].toString() == 'invalidtoken') {
+          if (res["status"] != null &&
+              !res["status"] &&
+              res['error_status'] != null &&
+              res['error_status'] != null &&
+              res['error_code'].toString().isNotEmpty) {
+            // TODO map the error code accordingly
+            if (res['error_code'].toString() == 'invalidtoken') {
               throw const ApiError(
                 type: ErrorType.response,
                 error: Strings.unauthorize,
@@ -36,7 +41,7 @@ abstract class ApiResponse {
             } else {
               throw ApiError(
                 type: ErrorType.response,
-                error: res['msg']?.toString() ??
+                error: res['message']?.toString() ??
                     (res['message']?.toString() ?? Strings.unknownError),
               );
             }
@@ -74,6 +79,14 @@ abstract class ApiResponse {
         type: ErrorType.connectTimeout,
         error: e.message?.toString() ?? Strings.connectionTimeout,
       );
+    }
+  }
+
+  static ApiSuccessResponseModel getApiResponse(Response response) {
+    try {
+      return ApiSuccessResponseModel.fromJson(_parseResponse(response));
+    } catch (e) {
+      rethrow;
     }
   }
 }

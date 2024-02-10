@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/modules/widgets/base_widget.dart';
-import 'package:flutter_getx_template/app/routes/app_pages.dart';
-import 'package:get/get.dart';
 
 class VerificationStarted extends StatelessWidget {
   const VerificationStarted({
@@ -62,47 +60,47 @@ class VerificationStarted extends StatelessWidget {
               ),
             ),
           ),
-          titleSubtitleWidget(
-            title: "DATE AND TIME",
-            subtitle: "Tomorrow 22 Sep, 12:30 AM",
-            button: GestureDetector(
-              onTap: () {
-                Get.toNamed(
-                  Routes.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION,
-                  arguments: true,
-                )?.then((value) {
-                  // fetch the updated date time from here and make API call
-                });
-              },
-              child: Container(
-                width: 76.w,
-                height: 36.h,
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(
-                    12.r,
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: 8.h,
-                  horizontal: 12.w,
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(AppAssets.pngs.commonEdit),
-                    Text(
-                      " edit",
-                      style: AppTextStyle.regularStyle.copyWith(
-                        color: AppColors.blue,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // titleSubtitleWidget(
+          //   title: "DATE AND TIME",
+          //   subtitle: "Tomorrow 22 Sep, 12:30 AM",
+          //   button: GestureDetector(
+          //     onTap: () {
+          //       Get.toNamed(
+          //         Routes.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION,
+          //         arguments: true,
+          //       )?.then((value) {
+          //         // fetch the updated date time from here and make API call
+          //       });
+          //     },
+          //     child: Container(
+          //       width: 76.w,
+          //       height: 36.h,
+          //       decoration: BoxDecoration(
+          //         color: AppColors.white,
+          //         borderRadius: BorderRadius.circular(
+          //           12.r,
+          //         ),
+          //       ),
+          //       padding: EdgeInsets.symmetric(
+          //         vertical: 8.h,
+          //         horizontal: 12.w,
+          //       ),
+          //       child: Row(
+          //         children: [
+          //           Image.asset(AppAssets.pngs.commonEdit),
+          //           Text(
+          //             " edit",
+          //             style: AppTextStyle.regularStyle.copyWith(
+          //               color: AppColors.blue,
+          //               fontSize: 14.sp,
+          //               fontWeight: FontWeight.w500,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SizedBox(height: 8.h),
           SizedBox(height: 32.h),
         ],

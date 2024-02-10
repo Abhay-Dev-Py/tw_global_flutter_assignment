@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/modules/widgets/base_widget.dart';
-import 'package:flutter_getx_template/app/routes/app_pages.dart';
-import 'package:get/get.dart';
 
 class OfflineVerification extends StatelessWidget {
   final bool isAdminAssigned;
@@ -162,64 +160,64 @@ class OfflineVerification extends StatelessWidget {
                 ),
               ),
             ),
-          Text(
-            isAdminAssigned
-                ? "DATE AND TIME"
-                : "Selected date for time and verification",
-            style: TextStyle(
-              color: AppColors.hintInfotextColor,
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              height: 0,
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            "Tomorrow 22 Sep, 12:30 AM",
-            style: TextStyle(
-              color: AppColors.indigo,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: 8.h),
-          GestureDetector(
-            onTap: () {
-              Get.toNamed(
-                Routes.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION,
-                arguments: true,
-              )?.then((value) {
-                // fetch the updated date time from here and make API call
-              });
-            },
-            child: Container(
-              width: 76.w,
-              height: 36.h,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(
-                  12.r,
-                ),
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: 8.h,
-                horizontal: 12.w,
-              ),
-              child: Row(
-                children: [
-                  Image.asset(AppAssets.pngs.commonEdit),
-                  Text(
-                    " edit",
-                    style: AppTextStyle.regularStyle.copyWith(
-                      color: AppColors.blue,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Text(
+          //   isAdminAssigned
+          //       ? "DATE AND TIME"
+          //       : "Selected date for time and verification",
+          //   style: TextStyle(
+          //     color: AppColors.hintInfotextColor,
+          //     fontSize: 14.sp,
+          //     fontWeight: FontWeight.w500,
+          //     height: 0,
+          //   ),
+          // ),
+          // SizedBox(height: 8.h),
+          // Text(
+          //   "Tomorrow 22 Sep, 12:30 AM",
+          //   style: TextStyle(
+          //     color: AppColors.indigo,
+          //     fontSize: 18.sp,
+          //     fontWeight: FontWeight.w500,
+          //   ),
+          // ),
+          // SizedBox(height: 8.h),
+          // GestureDetector(
+          //   onTap: () {
+          //     Get.toNamed(
+          //       Routes.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION,
+          //       arguments: true,
+          //     )?.then((value) {
+          //       // fetch the updated date time from here and make API call
+          //     });
+          //   },
+          //   child: Container(
+          //     width: 76.w,
+          //     height: 36.h,
+          //     decoration: BoxDecoration(
+          //       color: AppColors.white,
+          //       borderRadius: BorderRadius.circular(
+          //         12.r,
+          //       ),
+          //     ),
+          //     padding: EdgeInsets.symmetric(
+          //       vertical: 8.h,
+          //       horizontal: 12.w,
+          //     ),
+          //     child: Row(
+          //       children: [
+          //         Image.asset(AppAssets.pngs.commonEdit),
+          //         Text(
+          //           " edit",
+          //           style: AppTextStyle.regularStyle.copyWith(
+          //             color: AppColors.blue,
+          //             fontSize: 14.sp,
+          //             fontWeight: FontWeight.w500,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           SizedBox(height: 32.h),
         ],
       ),

@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 abstract class Utils {
   static void showDialog(
@@ -304,12 +305,22 @@ abstract class Utils {
   }
 
   static String formatDateString(String dateString) {
-  try {
-    DateTime dateTime = DateTime.parse(dateString);
-    String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
-    return formattedDate;
-  } catch (e) {
-    return "Invalid Date";
+    try {
+      DateTime dateTime = DateTime.parse(dateString);
+      String formattedDate = DateFormat('dd-MM-yyyy').format(dateTime);
+      return formattedDate;
+    } catch (e) {
+      return "Invalid Date";
+    }
   }
-}
+
+  static launchCaller(String mobileNumber) async {
+    String url = "tel:+91$mobileNumber";
+
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }

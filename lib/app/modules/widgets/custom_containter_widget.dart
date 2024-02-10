@@ -9,18 +9,24 @@ class CustomContainer extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final Widget child;
+  final double? height;
+  final double? width;
   const CustomContainer({
     Key? key,
     this.margin,
     this.padding,
-    required this.containerColor,
+    this.containerColor = AppColors.white,
     required this.child,
-    required this.borderColor,
+    this.borderColor = Colors.transparent,
+    this.height,
+    this.width,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
+      width: width,
       padding: padding ?? const EdgeInsets.all(3.0),
       margin: margin ?? const EdgeInsets.all(0),
       decoration: BoxDecoration(
@@ -66,7 +72,6 @@ class TextFieldContainer extends StatelessWidget {
         borderRadius: BorderRadius.all(
           Radius.circular(16.r),
         ),
-        
         color: AppColors.white,
       ),
       child: Padding(

@@ -15,23 +15,29 @@ class CustomCheckboxWidget extends FormField<bool> {
           validator: (v) => AppValidators.validateCheckbox(v: v!),
           builder: (state) {
             return Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Checkbox(
-                  value: state.value,
-                  onChanged: state.didChange,
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Checkbox(
+                    value: state.value,
+                    onChanged: state.didChange,
+                  ),
                 ),
-                Column(
-                  children: [
-                    titleWidget,
-                    // if (state.hasError)
-                    //   Builder(
-                    //     builder: (_) => Text(
-                    //       state.errorText!,
-                    //       style:
-                    //           TextStyle(color: Theme.of(_).colorScheme.error),
-                    //     ),
-                    //   ),
-                  ],
+                Flexible(
+                  child: Column(
+                    children: [
+                      titleWidget,
+                      // if (state.hasError)
+                      //   Builder(
+                      //     builder: (_) => Text(
+                      //       state.errorText!,
+                      //       style:
+                      //           TextStyle(color: Theme.of(_).colorScheme.error),
+                      //     ),
+                      //   ),
+                    ],
+                  ),
                 ),
               ],
             );

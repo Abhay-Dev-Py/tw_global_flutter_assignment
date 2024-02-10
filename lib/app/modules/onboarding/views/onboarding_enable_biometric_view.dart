@@ -23,6 +23,8 @@ class _OnboardingEnableBiometricViewState
     return Consumer<OnboardingProvider>(
       builder: (context, value, __) {
         return AppScaffold(
+          isBackEnabled: false,
+          isFromAgentOnboarding: true,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

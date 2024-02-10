@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+
 
 import 'package:either_dart/either.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
@@ -9,7 +11,10 @@ import 'package:get/get.dart';
 
 import 'api_helper.dart';
 
+
 class ApiHelperImpl extends GetConnect with ApiHelper {
+  
+
   @override
   void onInit() {
     httpClient.baseUrl = Constants.baseUrl;
@@ -81,10 +86,11 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
     dynamic Function(double)? uploadProgress,
   }) async {
     try {
+      
       return Right(
         await post(
           url,
-          body,
+          json.encode(body),
           contentType: contentType,
           headers: headers,
           query: query,
@@ -134,7 +140,7 @@ class ApiHelperImpl extends GetConnect with ApiHelper {
   }) async {
     try {
       return Right(
-       await delete(
+        await delete(
           url,
           headers: headers,
           contentType: contentType,

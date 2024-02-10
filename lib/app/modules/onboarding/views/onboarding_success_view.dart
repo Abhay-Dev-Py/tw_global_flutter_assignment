@@ -20,6 +20,10 @@ class _OnboardingSuccessViewState extends State<OnboardingSuccessView> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      isBackEnabled: false,
+      onBackPress: () {
+        Get.offAllNamed(Routes.AGENT_DASHBOARD);
+      },
       body: Column(
         children: [
           SizedBox(height: 108.h),
@@ -36,19 +40,21 @@ class _OnboardingSuccessViewState extends State<OnboardingSuccessView> {
           ),
           SizedBox(height: 8.h),
           Text(
-            "Your Banking Correspondent (BC) account creation request has been successfully submitted.",
-            style: AppTextStyle.lightStyle.copyWith(
-              fontWeight: FontWeight.w200,
+            "Our team will visit for offline verification shortly. You will receive a call from the admin who will inform about the timings for the visit to conduct the verification.",
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
               fontSize: 14.sp,
+              color: AppColors.hintInfotextColor,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 14.h),
           Text(
-            "Our team will visit your shop for offline verification soon",
-            style: AppTextStyle.lightStyle.copyWith(
-              fontWeight: FontWeight.w200,
+            "Please ensure you're at the office during the visit.",
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
               fontSize: 14.sp,
+              color: AppColors.hintInfotextColor,
             ),
             textAlign: TextAlign.center,
           ),

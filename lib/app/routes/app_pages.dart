@@ -1,8 +1,16 @@
 import 'package:flutter_getx_template/app/data/services/navigation_service.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_otp_verify_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_request_details_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_verification_status_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_dashboard_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_front_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_review_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_submit_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_upload_view.dart';
 import 'package:flutter_getx_template/app/modules/agent_dashboard/view/agent_dashboard_view.dart';
 import 'package:flutter_getx_template/app/modules/landing/view/app_landing_view.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_confirm_passcode_view.dart';
+import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_e_sign_view.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_email_address_view.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_enable_biometric_view.dart';
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_iibf_certificate_view.dart';
@@ -26,7 +34,7 @@ part 'app_routes.dart';
 abstract class AppPages {
   const AppPages._();
 
-  static const INITIAL = Routes.ONBOARDING_MOBILE_NUMBER;
+  static const INITIAL = Routes.PAN_SUBMIT_VIEW;
 
   static final routes = [
     GetPage(
@@ -83,6 +91,10 @@ abstract class AppPages {
       page: () => const OnboardingReviewDetailsView(),
     ),
     GetPage(
+      name: _Paths.ONBOARDING_E_SIGN_VIEW,
+      page: () => const OnboardingEsignView(),
+    ),
+    GetPage(
       name: _Paths.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION,
       page: () => const OnboardingScheduleOfflineVerificationView(),
     ),
@@ -112,6 +124,36 @@ abstract class AppPages {
       name: _Paths.SIGN_IN_PASSCODE_VERIFY,
       page: () => const SignInPasscodeVerifyView(),
     ),
+    GetPage(
+      name: _Paths.ADMIN_AGENT_REQUEST_DETAILS,
+      page: () => const AdminAgentRequestDetailsView(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_AGENT_OTP_VERIFY,
+      page: () => const AdminAgentOtpVerifyView(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_AGENT_VERIFICATION_STATUS,
+      page: () => const AdminAgentVerificationStatusView(),
+    ),
+    GetPage(
+      name: _Paths.PAN_UPLOAD_VIEW,
+      page: () => const PanUploadView(),
+    ),
+    GetPage(
+      name: _Paths.PAN_FRONT_VIEW,
+      page: () => const PanFrontView(),
+    ),
+    GetPage(
+      name: _Paths.PAN_REVIEW_VIEW,
+      page: () => const PanReviewView(),
+    ),
+    GetPage(
+      name: _Paths.PAN_SUBMIT_VIEW,
+      page: () => const PanSubmitView(),
+    ),
+    
+    
   ];
 
   static final goRoutes = GoRouter(

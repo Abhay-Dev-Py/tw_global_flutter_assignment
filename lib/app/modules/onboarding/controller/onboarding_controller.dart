@@ -23,7 +23,8 @@ enum OnboardingSteps {
   enter_pan_details,
   enter_shop_details,
   enter_certificate_details,
-  review_details,
+  e_sign,
+  // review_details,
   schedule_offline_verification,
   all_set,
 }
@@ -32,10 +33,18 @@ class OnboardingProvider extends ChangeNotifier {
   final OnboardingServices _service = OnboardingServices();
   AgentOnboardingModel onboardingModel = getOnboardingModel;
   OnboardingSteps _currentStep = OnboardingSteps.location_permission;
+  bool _inAsyncCall = false;
+  bool get inAsyncCall => this._inAsyncCall;
 
-  OnboardingSteps get currentStep => this._currentStep;
+  set inAsyncCall(bool value) => this._inAsyncCall = value;
+
+  OnboardingSteps get currentStep {
+    notifyListeners();
+    return this._currentStep;
+  }
 
   set currentStep(OnboardingSteps value) {
+    inAsyncCall = false;
     cacheAgentOnboardingDetails();
     this._currentStep = value;
     notifyListeners();
@@ -100,11 +109,32 @@ class OnboardingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _clearMobileOtp = false;
+  bool get clearMobileOtp => this._clearMobileOtp;
+
+  set clearMobileOtp(bool value) {
+    this._clearMobileOtp = value;
+    setMobileOTPControllerValue = "";
+    notifyListeners();
+  }
+
   Future<bool> sendMobileOtp() async {
-    await _service.sendMobileOtp(
-      mobileNumber: "+917016131818",
-    );
-    return false;
+    inAsyncCall = true;
+    return await _service
+        .sendMobileOtp(
+          mobileNumber: "+91" + mobileNumberController.text,
+        )
+        .whenComplete(() => inAsyncCall = false);
+  }
+
+  Future<bool> verifyMobileOtp({bool isResendOtp = false}) async {
+    inAsyncCall = true;
+    return await _service
+        .verifyMobileOtp(
+          otp: mobileOTPController.text,
+          isResendOtp: isResendOtp,
+        )
+        .whenComplete(() => inAsyncCall = false);
   }
 
   // Mobile Number View Logics -- End
@@ -142,7 +172,7 @@ class OnboardingProvider extends ChangeNotifier {
   }
 
   void startTimer() {
-    _secondsRemaining = 120; // 2 minutes
+    _secondsRemaining = Constants.otpResendSeconds;
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_secondsRemaining > 0) {
         _secondsRemaining--;
@@ -579,7 +609,7 @@ class OnboardingProvider extends ChangeNotifier {
         onboardingModel.iibfCertificateDetails.certificatePhotoFilePath =
             getIbfCertificatePhotoAddress;
         break;
-      case OnboardingSteps.review_details:
+      case OnboardingSteps.e_sign:
         break;
       case OnboardingSteps.schedule_offline_verification:
         break;

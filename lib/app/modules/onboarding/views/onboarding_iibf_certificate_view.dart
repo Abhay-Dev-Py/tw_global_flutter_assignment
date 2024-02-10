@@ -195,8 +195,8 @@ class _OnboardingIIBFCertificateDetailsViewState
                               listen: false,
                             ).agentStatus =
                                 AgentOnboardingStatus.upload_iibf_certificate;
-                            value.currentStep = OnboardingSteps.review_details;
-                            Get.toNamed(Routes.ONBOARDING_REVIEW_DETAILS);
+                            value.currentStep = OnboardingSteps.e_sign;
+                            Get.toNamed(Routes.ONBOARDING_E_SIGN_VIEW);
                           },
                   ),
                   SizedBox(height: 20.h),

@@ -22,7 +22,7 @@ abstract class Strings {
   static const String numberCantBeEmpty = '$emailOrMobile $cantBeEmpty';
   static const String emailCantBeEmpty = 'Email $cantBeEmpty';
   static const String enterValid = 'Please enter a valid';
-  static const String enterValidNumber = '$enterValid $mobileNumber.';
+  static const String enterValidNumber = 'Mobile number entered is invalid';
   static const String enterValidPAN = '$enterValid PAN card details.';
   static const String enterValidIIBF = 'Enter a valid IIBF registration number';
   static const String enterValidIIBFSerial = 'Enter a valid IIBF serial number';

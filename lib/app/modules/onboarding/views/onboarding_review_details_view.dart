@@ -30,6 +30,8 @@ class _OnboardingEmailAddressViewState
     return Consumer<OnboardingProvider>(
       builder: (context, value, __) {
         return AppScaffold(
+          isBackEnabled: false,
+          isFromAgentOnboarding: true,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -229,7 +231,7 @@ class _OnboardingEmailAddressViewState
             right: getOnboardingModel
                     .iibfCertificateDetails.certificatePhotoFilePath ??
                 "",
-            isEditable: !isEditable,
+            isEditable: false,
             isView: true,
             isDividerRequired: false,
             detail: ReviewDetails.iibf_certificate_photo,
@@ -276,7 +278,17 @@ class _OnboardingEmailAddressViewState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Flexible(
+                    GestureDetector(
+                      onTap: () {
+                        if (isView) {
+                          showBottomsheet(
+                            context: context,
+                            content: sheetCertificateProfile(),
+                            showCloseButton: true,
+                            closeButtonheight: 0.37.sh,
+                          );
+                        }
+                      },
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: MyText(
@@ -352,6 +364,47 @@ class _OnboardingEmailAddressViewState
                 textFieldWidget(
                   detail: detail,
                   provider: value,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget sheetCertificateProfile() {
+    return Consumer<OnboardingProvider>(
+      builder: (context, value, __) {
+        return SizedBox(
+          height: 0.58.sh,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 0.05.sw,
+              vertical: 0.03.sh,
+            ),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: MyText(
+                    title: "IIBF certificate photo",
+                    color: AppColors.indigo,
+                    fontWeight: FontWeight.w800,
+                    size: 21.sp,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Card(
+                  elevation: 2,
+                  child: CustomContainer(
+                    borderColor: AppColors.lightBlue,
+                    containerColor: AppColors.white,
+                    child: Image.asset(AppAssets.pngs.commonSampleCertificate),
+                    padding: EdgeInsets.all(8.h),
+                  ),
                 ),
               ],
             ),

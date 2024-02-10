@@ -4,14 +4,14 @@ class AgentRequestModel {
   String? name;
   String? address;
   String? number;
-  String? agentVerificationStatus;
+  AgentVerificationStatus agentVerificationStatus;
   AdminSelectedTab adminVerificationStatus;
 
   AgentRequestModel({
     this.name,
     this.address,
     this.number,
-    this.agentVerificationStatus,
+    this.agentVerificationStatus = AgentVerificationStatus.view_details,
     this.adminVerificationStatus = AdminSelectedTab.pending,
   });
 

@@ -10,6 +10,8 @@ abstract class Constants {
       'https://i.picsum.photos/id/1084/536/354.jpg'
       '?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60';
   static const String placeHolderBlurHash = 'LEHV6nWB2yk8pyo0adR*.7kCMdnj';
+
+  static const int otpResendSeconds = 120;
 }
 
 enum Role { agent, admin }
@@ -49,4 +51,18 @@ enum AdminSelectedTab {
   pending,
   in_progress,
   verififed,
+}
+
+enum AgentVerificationStatus {
+  view_details,
+  start_verification,
+}
+
+enum AgentVerificationFlowStep {
+  pan_verification,
+  details_confirmation,
+  shop_verification,
+  selfie_verification,
+  mobile_verification,
+  biometric,
 }

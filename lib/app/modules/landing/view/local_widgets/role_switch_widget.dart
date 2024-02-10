@@ -7,6 +7,7 @@ class RoleSwitchWidget extends StatelessWidget {
   final Function onPressed;
   final double? width;
   final TextStyle? style;
+  final bool isHighlighted;
   const RoleSwitchWidget({
     Key? key,
     required this.isSelected,
@@ -14,6 +15,7 @@ class RoleSwitchWidget extends StatelessWidget {
     required this.onPressed,
     this.width,
     this.style,
+    this.isHighlighted = false,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,9 @@ class RoleSwitchWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(45.r),
           color: isSelected ? AppColors.indigo : AppColors.white,
+          border: Border.all(
+            color: isHighlighted ? AppColors.blue : AppColors.white,
+          ),
         ),
         child: Center(
           child: Text(
@@ -37,7 +42,8 @@ class RoleSwitchWidget extends StatelessWidget {
                         fontSize: 16.sp,
                       )
                     : AppTextStyle.regularStyle.copyWith(
-                        color: AppColors.indigo,
+                        color:
+                            isHighlighted ? AppColors.blue : AppColors.indigo,
                         fontSize: 16.sp,
                       )),
           ),

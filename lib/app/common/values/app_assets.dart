@@ -17,6 +17,12 @@ class _AppLottieAnimations {
 
   final String splashTickAnimationJson =
       '$_baseAppLottieAnimationsUrl/splash_tick_animation.json';
+
+  final String loaderAppreciateAnimationJson =
+      '$_baseAppLottieAnimationsUrl/loader_appreciate_animation.json';
+
+  final String coinLoaderAnimationJson =
+      '$_baseAppLottieAnimationsUrl/coin_loader_animation.json';
 }
 
 class _AppPngs {
@@ -32,6 +38,9 @@ class _AppPngs {
   final String commonPasswordHide = '$_pngsCommon/password_hide.png';
   final String commonPasswordShow = '$_pngsCommon/password_show.png';
   final String commonEdit = '$_pngsCommon/edit.png';
+  final String commonSpeaker = '$_pngsCommon/speaker.png';
+  final String commonSampleCertificate =
+      '$_pngsCommon/sample_iibf_certificate.jpeg';
 
   /// Onboarding PNG
   final String onboardingLocation = '$_pngsOnboarding/onboarding_location.png';
@@ -43,6 +52,8 @@ class _AppPngs {
   final String dashboardAadhaarPlaceholder =
       '$_pngsDashboard/aadhaar_placeholder.png';
   final String dashboardPanPlaceholder = '$_pngsDashboard/pan_placeholder.png';
+  final String dashboardPanVerifyPlaceholder =
+      '$_pngsDashboard/pan_verify_placeholder.png';
   final String dashboardCertificatePlaceholder =
       '$_pngsDashboard/certificate_placeholder.png';
 
@@ -72,6 +83,7 @@ class _AppSvgs {
   // Dashboard svgs
   final String threeLineColumnSvg = '$_baseDashboardUrl/three_lines_column.svg';
   final String searchSvg = '$_baseDashboardUrl/search.svg';
+  final String directionSvg = '$_baseDashboardUrl/direction.svg';
 
   // Onboarding svgs
   final String locationSvg = '$_baseOnboardingUrl/location.svg';
