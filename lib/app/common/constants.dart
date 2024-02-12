@@ -33,6 +33,7 @@ enum ReviewDetails {
   city,
   state,
   country,
+  pincode,
   iibf_registration_number,
   serial_number,
   date_of_certificate_issue,
@@ -67,7 +68,7 @@ enum AgentVerificationFlowStep {
   biometric,
 }
 
-enum PanErrorCodes{
+enum PanErrorCodes {
   unable_to_read_pan_data,
   invalid_pan_number,
   pan_mismatch,
@@ -76,4 +77,18 @@ enum PanErrorCodes{
   pan_aadhar_not_linked,
   pan_upload_restricted,
   you_can_not_proceed,
+}
+
+enum ReviewAgentDetails {
+  full_name,
+  pan_number,
+  dob,
+  mobile_number,
+  email,
+  shop_name,
+  shop_address,
+  city,
+  state,
+  country,
+  pincode,
 }

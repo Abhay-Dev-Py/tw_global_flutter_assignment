@@ -3,6 +3,7 @@ import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_age
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_request_details_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_verification_status_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_dashboard_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/details_confirmation_views/confirm_agent_details_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_error_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_front_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_review_view.dart';
@@ -36,7 +37,7 @@ part 'app_routes.dart';
 abstract class AppPages {
   const AppPages._();
 
-  static const INITIAL = Routes.HELP_DESK_VIEW;
+  static const INITIAL = Routes.CONFIRM_AGENT_DETAILS_VIEW;
 
   static final routes = [
     GetPage(
@@ -161,6 +162,10 @@ abstract class AppPages {
     GetPage(
       name: _Paths.HELP_DESK_VIEW,
       page: () => const HelpDeskView(),
+    ),
+    GetPage(
+      name: _Paths.CONFIRM_AGENT_DETAILS_VIEW,
+      page: () => const ConfirmAgentDetailsView(),
     ),
   ];
 

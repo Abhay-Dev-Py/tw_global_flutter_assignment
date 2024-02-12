@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
+import 'package:flutter_getx_template/app/common/models/agent_details_verification_model.dart';
+import 'package:flutter_getx_template/app/common/util/utils.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/agent_request_model.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/agent_verification_step_model.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/pan_error_model.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_getx_template/app/routes/app_pages.dart';
 class AdminDashboardProvider extends ChangeNotifier {
   AdminSelectedTab _selectedTab = AdminSelectedTab.in_progress;
   AdminSelectedTab get selectedTab => this._selectedTab;
+  AgentDetailsVerificationModel verificationModel = getVerificationModel;
 
   set selectedTab(AdminSelectedTab value) {
     this._selectedTab = value;
@@ -163,6 +166,130 @@ class AdminDashboardProvider extends ChangeNotifier {
   getPanErrorModel(PanErrorCodes errorCode) => generatePanErrorModel(errorCode);
 
   // PAN Verification Logic -- End
+
+  // -------------------------------------------------
+
+  // Details Confirmation Logic -- Start
+
+  bool _isAgentDetailsEditable = true;
+  bool _isShopDetailsEditable = true;
+
+  bool get isAgentDetailsEditable => this._isAgentDetailsEditable;
+
+  set isAgentDetailsEditable(bool value) {
+    this._isAgentDetailsEditable = value;
+    notifyListeners();
+  }
+
+  get isShopDetailsEditable => this._isShopDetailsEditable;
+
+  set isShopDetailsEditable(value) {
+    this._isShopDetailsEditable = value;
+    notifyListeners();
+  }
+
+  final TextEditingController _shopNameController = TextEditingController();
+  TextEditingController get shopNameController => this._shopNameController;
+
+  set setShopNameControllerValue(String value) {
+    this._shopNameController.text = value;
+    notifyListeners();
+  }
+
+  final TextEditingController _shopAddressController = TextEditingController();
+  TextEditingController get shopAddressController =>
+      this._shopAddressController;
+
+  set setShopAddressControllerValue(String value) {
+    this._shopAddressController.text = value;
+    notifyListeners();
+  }
+
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _pincodeController = TextEditingController();
+
+  get cityController => this._cityController;
+
+  set setCityControllerValue(String value) {
+    this._cityController.text = value;
+    notifyListeners();
+  }
+
+  get stateController => this._stateController;
+
+  set setStateControllerValue(value) {
+    this._stateController.text = value;
+    notifyListeners();
+  }
+
+  get countryController => this._countryController;
+
+  set setCountryControllerValue(value) {
+    this._countryController.text = value;
+    notifyListeners();
+  }
+
+  get pincodeController => this._pincodeController;
+
+  set setPincodeControllerValue(value) {
+    this._pincodeController.text = value;
+    notifyListeners();
+  }
+
+
+  final TextEditingController _dobController = TextEditingController();
+  TextEditingController get dobController => this._dobController;
+
+  set setDobControllerValue(final value) {
+    this._dobController.text = Utils.formatDateString(value);
+    notifyListeners();
+  }
+
+
+  setVerificationDetails(ReviewAgentDetails detail, dynamic value) {
+    switch (detail) {
+      case ReviewAgentDetails.full_name:
+        setFullNameControllerValue = value;
+        verificationModel.panDetails.fullName = value;
+        break;
+      case ReviewAgentDetails.dob:
+        verificationModel.panDetails.dateOfBirth = value;
+        break;
+      case ReviewAgentDetails.email:
+        verificationModel.emailAddress = value;
+        break;
+      case ReviewAgentDetails.mobile_number:
+        verificationModel.mobileNumber = value;
+        break;
+      case ReviewAgentDetails.pan_number:
+        verificationModel.panDetails.panNumber = value;
+        break;
+      case ReviewAgentDetails.shop_name:
+        verificationModel.shopDetails.shopName = value;
+        break;
+      case ReviewAgentDetails.shop_address:
+        verificationModel.shopDetails.shopAddress = value;
+        break;
+      case ReviewAgentDetails.city:
+        verificationModel.shopDetails.city = value;
+        break;
+      case ReviewAgentDetails.state:
+        verificationModel.shopDetails.state = value;
+        break;
+      case ReviewAgentDetails.country:
+        verificationModel.shopDetails.country = value;
+        break;
+      case ReviewAgentDetails.pincode:
+        verificationModel.shopDetails.pincode = value;
+        break;
+    }
+  }
+
+
+
+  // Details Confirmation Logic -- End
 
   // -------------------------------------------------
 

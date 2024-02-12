@@ -456,6 +456,9 @@ class OnboardingProvider extends ChangeNotifier {
       case ReviewDetails.country:
         onboardingModel.shopDetails.country = value;
         break;
+      case ReviewDetails.pincode:
+        onboardingModel.shopDetails.pincode = value;
+        break;
       case ReviewDetails.iibf_registration_number:
         onboardingModel.iibfCertificateDetails.registrationNumber = value;
         break;
@@ -470,6 +473,7 @@ class OnboardingProvider extends ChangeNotifier {
         break;
     }
   }
+  
 
   // Review all details View Logics -- End
 

@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
-import 'package:flutter_getx_template/app/common/models/agent_onboarding_model.dart';
+import 'package:flutter_getx_template/app/common/models/agent_details_verification_model.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/common/util/validators.dart';
-import 'package:flutter_getx_template/app/modules/onboarding/controller/onboarding_controller.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/controller/admin_dashboard_controller.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_app_text.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_bottom_sheets.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_containter_widget.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_scaffold_widget.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_field_widget.dart';
-import 'package:flutter_getx_template/app/routes/app_pages.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class OnboardingReviewDetailsView extends StatefulWidget {
-  const OnboardingReviewDetailsView({Key? key}) : super(key: key);
+class ConfirmAgentDetailsView extends StatefulWidget {
+  const ConfirmAgentDetailsView({Key? key}) : super(key: key);
 
   @override
-  State<OnboardingReviewDetailsView> createState() =>
-      _OnboardingEmailAddressViewState();
+  State<ConfirmAgentDetailsView> createState() =>
+      _ConfirmAgentDetailsViewState();
 }
 
-class _OnboardingEmailAddressViewState
-    extends State<OnboardingReviewDetailsView> {
+class _ConfirmAgentDetailsViewState extends State<ConfirmAgentDetailsView> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<OnboardingProvider>(
+    return Consumer<AdminDashboardProvider>(
       builder: (context, value, __) {
         return AppScaffold(
           isBackEnabled: false,
@@ -53,16 +50,16 @@ class _OnboardingEmailAddressViewState
                   children: [
                     SizedBox(height: 20.h),
                     detailHeading(
-                      "Personal Details",
-                      isEditRequired: value.isPersonationDetailsEditable,
+                      "Agent Details",
+                      isEditRequired: value.isAgentDetailsEditable,
                       edit: () {
-                        value.isPersonationDetailsEditable =
-                            !value.isPersonationDetailsEditable;
+                        value.isAgentDetailsEditable =
+                            !value.isAgentDetailsEditable;
                       },
                     ),
                     SizedBox(height: 12.h),
-                    showPersonalDetails(
-                      isEditable: value.isPersonationDetailsEditable,
+                    showAgentDetails(
+                      isEditable: value.isAgentDetailsEditable,
                     ),
                     SizedBox(height: 20.h),
                     detailHeading(
@@ -77,31 +74,47 @@ class _OnboardingEmailAddressViewState
                     showShopDetails(
                       isEditable: value.isShopDetailsEditable,
                     ),
-                    SizedBox(height: 20.h),
-                    detailHeading(
-                      "IIBF certification",
-                      isEditRequired: value.isCertificateDetailsEditable,
-                      edit: () {
-                        value.isCertificateDetailsEditable =
-                            !value.isCertificateDetailsEditable;
-                      },
-                    ),
-                    SizedBox(height: 12.h),
-                    showCertificateDetails(
-                      isEditable: value.isCertificateDetailsEditable,
-                    ),
                     SizedBox(height: 60.h),
                   ],
                 ),
               ),
             ],
           ),
-          bottomSheet: CustomTextButton(
-            title: "Proceed",
-            onPressed: () {
-              value.currentStep = OnboardingSteps.schedule_offline_verification;
-              Get.toNamed(Routes.ONBOARDING_SCHEDULE_OFFLINE_VERIFICATION);
-            },
+          bottomSheet: Row(
+            children: [
+              Expanded(
+                child: CustomTextButton(
+                  title: "approve",
+                  onPressed: () {},
+                ),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: 44.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      border: Border.all(
+                        color: AppColors.red,
+                      ),
+                      borderRadius: BorderRadius.circular(24.r),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "reject",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
+                          color: AppColors.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           bottomSheetHeight: 54.h,
         );
@@ -109,7 +122,7 @@ class _OnboardingEmailAddressViewState
     );
   }
 
-  Widget showPersonalDetails({bool isEditable = false}) {
+  Widget showAgentDetails({bool isEditable = false}) {
     return CustomContainer(
       borderColor: AppColors.lightBlue,
       containerColor: AppColors.white,
@@ -118,34 +131,34 @@ class _OnboardingEmailAddressViewState
           SizedBox(height: 16.h),
           detailsRowWidget(
             left: "Full name",
-            right: getOnboardingModel.panDetails.fullName ?? "",
+            right: getVerificationModel.panDetails.fullName ?? "",
             isEditable: !isEditable,
-            detail: ReviewDetails.full_name,
+            detail: ReviewAgentDetails.full_name,
           ),
           detailsRowWidget(
             left: "Date of birth",
-            right: getOnboardingModel.panDetails.dateOfBirth ?? "",
+            right: getVerificationModel.panDetails.dateOfBirth ?? "",
             isEditable: false,
-            detail: ReviewDetails.dob,
+            detail: ReviewAgentDetails.dob,
           ),
           detailsRowWidget(
             left: "Email ID",
-            right: getOnboardingModel.emailAddress ?? "",
+            right: getVerificationModel.emailAddress ?? "",
             isEditable: false,
-            detail: ReviewDetails.email,
+            detail: ReviewAgentDetails.email,
           ),
           detailsRowWidget(
             left: "Mobile Number",
-            right: getOnboardingModel.mobileNumber ?? "",
+            right: getVerificationModel.mobileNumber ?? "",
             isEditable: false,
-            detail: ReviewDetails.mobile_number,
+            detail: ReviewAgentDetails.mobile_number,
           ),
           detailsRowWidget(
             left: "PAN Number",
-            right: getOnboardingModel.panDetails.panNumber ?? "",
+            right: getVerificationModel.panDetails.panNumber ?? "",
             isEditable: false,
             isDividerRequired: false,
-            detail: ReviewDetails.pan_number,
+            detail: ReviewAgentDetails.pan_number,
           ),
           SizedBox(height: 8.h),
         ],
@@ -162,79 +175,34 @@ class _OnboardingEmailAddressViewState
           SizedBox(height: 16.h),
           detailsRowWidget(
             left: "Shop name",
-            right: getOnboardingModel.shopDetails.shopName ?? "",
+            right: getVerificationModel.shopDetails.shopName ?? "",
             isEditable: !isEditable,
-            detail: ReviewDetails.shop_name,
+            detail: ReviewAgentDetails.shop_name,
           ),
           detailsRowWidget(
             left: "Shop address",
-            right: getOnboardingModel.shopDetails.shopAddress ?? "",
+            right: getVerificationModel.shopDetails.shopAddress ?? "",
             isEditable: !isEditable,
-            detail: ReviewDetails.shop_address,
+            detail: ReviewAgentDetails.shop_address,
           ),
           detailsRowWidget(
             left: "City",
-            right: getOnboardingModel.shopDetails.city ?? "",
+            right: getVerificationModel.shopDetails.city ?? "",
             isEditable: !isEditable,
-            detail: ReviewDetails.city,
+            detail: ReviewAgentDetails.city,
           ),
           detailsRowWidget(
             left: "State",
-            right: getOnboardingModel.shopDetails.state ?? "",
+            right: getVerificationModel.shopDetails.state ?? "",
             isEditable: !isEditable,
-            detail: ReviewDetails.state,
+            detail: ReviewAgentDetails.state,
           ),
           detailsRowWidget(
             left: "Country",
-            right: getOnboardingModel.shopDetails.country ?? "",
+            right: getVerificationModel.shopDetails.country ?? "",
             isEditable: false,
             isDividerRequired: false,
-            detail: ReviewDetails.country,
-          ),
-          SizedBox(height: 8.h),
-        ],
-      ),
-    );
-  }
-
-  Widget showCertificateDetails({bool isEditable = false}) {
-    return CustomContainer(
-      borderColor: AppColors.lightBlue,
-      containerColor: AppColors.white,
-      child: Column(
-        children: [
-          SizedBox(height: 16.h),
-          detailsRowWidget(
-            left: "IIBF registration number",
-            right:
-                getOnboardingModel.iibfCertificateDetails.registrationNumber ??
-                    "",
-            isEditable: !isEditable,
-            detail: ReviewDetails.iibf_registration_number,
-          ),
-          detailsRowWidget(
-            left: "Serial number",
-            right: getOnboardingModel.iibfCertificateDetails.serialNumber ?? "",
-            isEditable: !isEditable,
-            detail: ReviewDetails.serial_number,
-          ),
-          detailsRowWidget(
-            left: "Date of certificate issue",
-            right: getOnboardingModel
-                    .iibfCertificateDetails.dateOfCertificateIssue ??
-                "",
-            isEditable: !isEditable,
-            detail: ReviewDetails.date_of_certificate_issue,
-          ),
-          detailsRowWidget(
-            left: "IIBF certificate photo",
-            right: getOnboardingModel
-                    .iibfCertificateDetails.certificatePhotoFilePath ??
-                "",
-            isEditable: false,
-            isView: true,
-            isDividerRequired: false,
-            detail: ReviewDetails.iibf_certificate_photo,
+            detail: ReviewAgentDetails.country,
           ),
           SizedBox(height: 8.h),
         ],
@@ -246,9 +214,8 @@ class _OnboardingEmailAddressViewState
     required String left,
     required String right,
     required bool isEditable,
-    required ReviewDetails detail,
+    required ReviewAgentDetails detail,
     bool isDividerRequired = true,
-    bool isView = false,
   }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -278,30 +245,16 @@ class _OnboardingEmailAddressViewState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        if (isView) {
-                          showBottomsheet(
-                            context: context,
-                            content: sheetCertificateProfile(),
-                            showCloseButton: true,
-                            closeButtonheight: 0.37.sh,
-                          );
-                        }
-                      },
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: MyText(
-                          title: isView
-                              ? "view"
-                              : detail == ReviewDetails.pan_number
-                                  ? right.maskCharacters()
-                                  : right,
-                          color: isView ? AppColors.blue : AppColors.indigo,
-                          size: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          textAlign: TextAlign.end,
-                        ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: MyText(
+                        title: detail == ReviewAgentDetails.pan_number
+                            ? right.maskCharacters()
+                            : right,
+                        color: AppColors.indigo,
+                        size: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        textAlign: TextAlign.end,
                       ),
                     ),
                     if (isEditable)
@@ -339,8 +292,8 @@ class _OnboardingEmailAddressViewState
     );
   }
 
-  Widget sheetProfile(ReviewDetails detail) {
-    return Consumer<OnboardingProvider>(
+  Widget sheetProfile(ReviewAgentDetails detail) {
+    return Consumer<AdminDashboardProvider>(
       builder: (context, value, __) {
         return SizedBox(
           height: 0.40.sh,
@@ -373,53 +326,40 @@ class _OnboardingEmailAddressViewState
     );
   }
 
-  Widget sheetCertificateProfile() {
-    return Consumer<OnboardingProvider>(
-      builder: (context, value, __) {
-        return SizedBox(
-          height: 0.58.sh,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 0.05.sw,
-              vertical: 0.03.sh,
-            ),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: MyText(
-                    title: "IIBF certificate photo",
-                    color: AppColors.indigo,
-                    fontWeight: FontWeight.w800,
-                    size: 21.sp,
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Card(
-                  elevation: 2,
-                  child: CustomContainer(
-                    borderColor: AppColors.lightBlue,
-                    containerColor: AppColors.white,
-                    child: Image.asset(AppAssets.pngs.commonSampleCertificate),
-                    padding: EdgeInsets.all(8.h),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+  String getSheetHeaderString(ReviewAgentDetails detail) {
+    switch (detail) {
+      case ReviewAgentDetails.full_name:
+        return "Update full name";
+
+      case ReviewAgentDetails.dob:
+        return "Update date of birth";
+      case ReviewAgentDetails.email:
+        return "Update email";
+      case ReviewAgentDetails.mobile_number:
+        return "Update mobile number";
+      case ReviewAgentDetails.pan_number:
+        return "Update PAN number";
+      case ReviewAgentDetails.shop_name:
+        return "Update shop name";
+      case ReviewAgentDetails.shop_address:
+        return "Update shop address";
+      case ReviewAgentDetails.city:
+        return "Update city";
+      case ReviewAgentDetails.state:
+        return "Update state";
+      case ReviewAgentDetails.country:
+        return "Update";
+      case ReviewAgentDetails.pincode:
+        return "Update pincode";
+    }
   }
 
   Column textFieldWidget({
-    required ReviewDetails detail,
-    required OnboardingProvider provider,
+    required ReviewAgentDetails detail,
+    required AdminDashboardProvider provider,
   }) {
     switch (detail) {
-      case ReviewDetails.full_name:
+      case ReviewAgentDetails.full_name:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -442,7 +382,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.fullNameController.text,
                       );
@@ -452,7 +392,7 @@ class _OnboardingEmailAddressViewState
           ],
         );
 
-      case ReviewDetails.dob:
+      case ReviewAgentDetails.dob:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -492,7 +432,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.dobController.text,
                       );
@@ -502,11 +442,11 @@ class _OnboardingEmailAddressViewState
           ],
         );
 
-      case ReviewDetails.email:
+      case ReviewAgentDetails.email:
         break;
-      case ReviewDetails.mobile_number:
+      case ReviewAgentDetails.mobile_number:
         break;
-      case ReviewDetails.pan_number:
+      case ReviewAgentDetails.pan_number:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -530,7 +470,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.panNumberController.text,
                       );
@@ -540,7 +480,7 @@ class _OnboardingEmailAddressViewState
           ],
         );
 
-      case ReviewDetails.shop_name:
+      case ReviewAgentDetails.shop_name:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -564,7 +504,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.shopNameController.text,
                       );
@@ -574,7 +514,7 @@ class _OnboardingEmailAddressViewState
           ],
         );
 
-      case ReviewDetails.shop_address:
+      case ReviewAgentDetails.shop_address:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -598,7 +538,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.shopAddressController.text,
                       );
@@ -607,7 +547,7 @@ class _OnboardingEmailAddressViewState
             ),
           ],
         );
-      case ReviewDetails.city:
+      case ReviewAgentDetails.city:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -631,7 +571,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.cityController.text,
                       );
@@ -640,7 +580,7 @@ class _OnboardingEmailAddressViewState
             ),
           ],
         );
-      case ReviewDetails.state:
+      case ReviewAgentDetails.state:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -663,7 +603,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.stateController.text,
                       );
@@ -672,9 +612,9 @@ class _OnboardingEmailAddressViewState
             ),
           ],
         );
-      case ReviewDetails.country:
+      case ReviewAgentDetails.country:
         break;
-      case ReviewDetails.pincode:
+      case ReviewAgentDetails.pincode:
         return Column(
           children: [
             CustomTextFieldWidget(
@@ -697,7 +637,7 @@ class _OnboardingEmailAddressViewState
                       null
                   ? null
                   : () {
-                      provider.setOnboardingDetails(
+                      provider.setVerificationDetails(
                         detail,
                         provider.pincodeController.text,
                       );
@@ -706,76 +646,6 @@ class _OnboardingEmailAddressViewState
             ),
           ],
         );
-
-      case ReviewDetails.iibf_registration_number:
-        return Column(
-          children: [
-            CustomTextFieldWidget(
-              labelText: "Enter IIBF registration number",
-              controller: provider.shopNameController,
-              onChanged: (updatedText) {
-                provider.shopNameController.text =
-                    updatedText?.toUpperCase() ?? "";
-              },
-              validator: (value) => fetchValidator(value, detail),
-              keyboardType: TextInputType.text,
-              maxLength: 20,
-              textFeildType: TextFeildType.text,
-            ),
-            SizedBox(height: 24.h),
-            CustomTextButton(
-              title: "update",
-              onPressed: AppValidators.validateIIBFRegistrationNumber(
-                        provider.shopNameController.text,
-                      ) !=
-                      null
-                  ? null
-                  : () {
-                      provider.setOnboardingDetails(
-                        detail,
-                        provider.registrationNumberController.text,
-                      );
-                      Navigator.pop(context);
-                    },
-            ),
-          ],
-        );
-
-      case ReviewDetails.serial_number:
-        return Column(
-          children: [
-            CustomTextFieldWidget(
-              labelText: "Enter IIBF serial number",
-              controller: provider.serialNumberController,
-              onChanged: (updatedText) {
-                provider.serialNumberController.text = updatedText ?? "";
-              },
-              validator: (value) => fetchValidator(value, detail),
-              keyboardType: TextInputType.text,
-              maxLength: 20,
-              textFeildType: TextFeildType.text,
-            ),
-            SizedBox(height: 24.h),
-            CustomTextButton(
-              title: "update",
-              onPressed: AppValidators.validateIIBFSerial(
-                        provider.serialNumberController.text,
-                      ) !=
-                      null
-                  ? null
-                  : () {
-                      provider.setOnboardingDetails(
-                        detail,
-                        provider.serialNumberController.text,
-                      );
-                      Navigator.pop(context);
-                    },
-            ),
-          ],
-        );
-      case ReviewDetails.date_of_certificate_issue:
-      case ReviewDetails.iibf_certificate_photo:
-        break;
     }
     return Column(
       children: [
@@ -800,7 +670,7 @@ class _OnboardingEmailAddressViewState
                   null
               ? null
               : () {
-                  provider.setOnboardingDetails(
+                  provider.setVerificationDetails(
                     detail,
                     provider.shopNameController.text,
                   );
@@ -811,113 +681,33 @@ class _OnboardingEmailAddressViewState
     );
   }
 
-  String? fetchValidator(String? value, ReviewDetails detail) {
+  String? fetchValidator(String? value, ReviewAgentDetails detail) {
     switch (detail) {
-      case ReviewDetails.full_name:
+      case ReviewAgentDetails.full_name:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.dob:
+      case ReviewAgentDetails.dob:
         return AppValidators.validateDOB(value);
-      case ReviewDetails.email:
+      case ReviewAgentDetails.email:
         return AppValidators.validateEmail(value);
-      case ReviewDetails.mobile_number:
+      case ReviewAgentDetails.mobile_number:
         return AppValidators.validatePhone(value);
-      case ReviewDetails.pan_number:
+      case ReviewAgentDetails.pan_number:
         return AppValidators.validatePAN(value);
-      case ReviewDetails.shop_name:
+      case ReviewAgentDetails.shop_name:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.shop_address:
+      case ReviewAgentDetails.shop_address:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.city:
+      case ReviewAgentDetails.city:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.state:
+      case ReviewAgentDetails.state:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.country:
+      case ReviewAgentDetails.country:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.pincode:
+      case ReviewAgentDetails.pincode:
         return AppValidators.validateEmpty(value);
-      case ReviewDetails.iibf_registration_number:
-        return AppValidators.validateIIBFRegistrationNumber(value);
-      case ReviewDetails.serial_number:
-        return AppValidators.validateIIBFSerial(value);
-      case ReviewDetails.date_of_certificate_issue:
-        return AppValidators.validateEmpty(value);
-      case ReviewDetails.iibf_certificate_photo:
-        return AppValidators.validateEmpty(value);
+
       default:
         return AppValidators.validateEmpty(value);
-    }
-  }
-
-  TextEditingController fetchTextEditingController({
-    required ReviewDetails detail,
-    required OnboardingProvider provider,
-  }) {
-    switch (detail) {
-      case ReviewDetails.full_name:
-        return provider.fullNameController;
-      case ReviewDetails.dob:
-        return provider.dobController;
-      case ReviewDetails.email:
-        return provider.emailAddressController;
-      case ReviewDetails.mobile_number:
-        return provider.mobileNumberController;
-      case ReviewDetails.pan_number:
-        return provider.panNumberController;
-      case ReviewDetails.shop_name:
-        return provider.shopNameController;
-      case ReviewDetails.shop_address:
-        return provider.shopAddressController;
-      case ReviewDetails.city:
-        return provider.cityController;
-      case ReviewDetails.state:
-        return provider.stateController;
-      case ReviewDetails.country:
-        return provider.countryController;
-      case ReviewDetails.iibf_registration_number:
-        return provider.registrationNumberController;
-      case ReviewDetails.serial_number:
-        return provider.serialNumberController;
-      case ReviewDetails.date_of_certificate_issue:
-        return provider.dateOfCertificateIssueController;
-      case ReviewDetails.iibf_certificate_photo:
-      default:
-        return TextEditingController();
-    }
-  }
-
-  String getSheetHeaderString(ReviewDetails detail) {
-    switch (detail) {
-      case ReviewDetails.full_name:
-        return "Update full name";
-
-      case ReviewDetails.dob:
-        return "Update date of birth";
-      case ReviewDetails.email:
-        return "Update email";
-      case ReviewDetails.mobile_number:
-        return "Update mobile number";
-      case ReviewDetails.pan_number:
-        return "Update PAN number";
-      case ReviewDetails.shop_name:
-        return "Update shop name";
-      case ReviewDetails.shop_address:
-        return "Update shop address";
-      case ReviewDetails.city:
-        return "Update city";
-      case ReviewDetails.state:
-        return "Update state";
-      case ReviewDetails.country:
-        return "Update";
-      case ReviewDetails.pincode:
-        return "Update pincode";
-      case ReviewDetails.iibf_registration_number:
-        return "Update IIBF registration number";
-      case ReviewDetails.serial_number:
-        return "Update IIBF serial number";
-      case ReviewDetails.date_of_certificate_issue:
-        return "Update IIBF certificate issue number";
-      case ReviewDetails.iibf_certificate_photo:
-        return "Update IIBF certificate photo";
     }
   }
 }

@@ -4,6 +4,7 @@ part of 'app_pages.dart';
 abstract class Routes {
   static const HOME = _Paths.HOME;
   static const LANDING = _Paths.LANDING;
+  static const HELP_DESK_VIEW = _Paths.HELP_DESK_VIEW;
 
   static const ONBOARDING_LOCATION = _Paths.ONBOARDING_LOCATION;
   static const ONBOARDING_MOBILE_NUMBER = _Paths.ONBOARDING_MOBILE_NUMBER;
@@ -34,12 +35,14 @@ abstract class Routes {
   static const ADMIN_AGENT_OTP_VERIFY = _Paths.ADMIN_AGENT_OTP_VERIFY;
   static const ADMIN_AGENT_VERIFICATION_STATUS =
       _Paths.ADMIN_AGENT_VERIFICATION_STATUS;
+
   static const PAN_UPLOAD_VIEW = _Paths.PAN_UPLOAD_VIEW;
   static const PAN_FRONT_VIEW = _Paths.PAN_FRONT_VIEW;
   static const PAN_REVIEW_VIEW = _Paths.PAN_REVIEW_VIEW;
   static const PAN_SUBMIT_VIEW = _Paths.PAN_SUBMIT_VIEW;
   static const PAN_ERROR_VIEW = _Paths.PAN_ERROR_VIEW;
-  static const HELP_DESK_VIEW = _Paths.HELP_DESK_VIEW;
+
+  static const CONFIRM_AGENT_DETAILS_VIEW = _Paths.CONFIRM_AGENT_DETAILS_VIEW;
 }
 
 abstract class _Paths {
@@ -80,4 +83,6 @@ abstract class _Paths {
   static const PAN_REVIEW_VIEW = '/pan_review_view';
   static const PAN_SUBMIT_VIEW = '/pan_submit_view';
   static const PAN_ERROR_VIEW = '/pan_error_view';
+
+  static const CONFIRM_AGENT_DETAILS_VIEW = '/confirm_agent_details_view';
 }
