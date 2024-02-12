@@ -66,3 +66,14 @@ enum AgentVerificationFlowStep {
   mobile_verification,
   biometric,
 }
+
+enum PanErrorCodes{
+  unable_to_read_pan_data,
+  invalid_pan_number,
+  pan_mismatch,
+  pan_upload_error,
+  kyc_processing_error,
+  pan_aadhar_not_linked,
+  pan_upload_restricted,
+  you_can_not_proceed,
+}

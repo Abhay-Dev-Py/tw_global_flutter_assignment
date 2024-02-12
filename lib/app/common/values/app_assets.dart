@@ -56,6 +56,7 @@ class _AppPngs {
       '$_pngsDashboard/pan_verify_placeholder.png';
   final String dashboardCertificatePlaceholder =
       '$_pngsDashboard/certificate_placeholder.png';
+  final String dashboardPanError = '$_pngsDashboard/pan_error.png';
 
   /// Sign in PNG
   final String signInPasscodeBanner =

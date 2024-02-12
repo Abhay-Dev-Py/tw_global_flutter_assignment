@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx_template/app/common/models/agent_onboarding_model.dart';
+import 'package:flutter_getx_template/app/common/providers/help_desk_provider.dart';
 import 'package:flutter_getx_template/app/common/providers/passcode_provider.dart';
 import 'package:flutter_getx_template/app/common/util/initializer.dart';
 import 'package:flutter_getx_template/app/data/services/navigation_service.dart';
@@ -27,7 +27,7 @@ void main() {
   // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
   //   (value) => Initializer.init(() {
-      
+
   //   }),
   // );
   runApp(const MyApp());
@@ -85,6 +85,9 @@ class _MyAppState extends State<MyApp> {
       ),
       ChangeNotifierProvider<AdminDashboardProvider>(
         create: (context) => AdminDashboardProvider(),
+      ),
+      ChangeNotifierProvider<HelpDeskProvider>(
+        create: (context) => HelpDeskProvider(),
       ),
     ];
   }

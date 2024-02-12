@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/agent_request_model.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/agent_verification_step_model.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/model/pan_error_model.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
 
 class AdminDashboardProvider extends ChangeNotifier {
@@ -130,7 +131,7 @@ class AdminDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-final TextEditingController _fatherNameController = TextEditingController();
+  final TextEditingController _fatherNameController = TextEditingController();
   TextEditingController get fatherNameController => this._fatherNameController;
 
   set setFatherNameControllerValue(String value) {
@@ -138,16 +139,13 @@ final TextEditingController _fatherNameController = TextEditingController();
     notifyListeners();
   }
 
-
-   bool _showPanNumber = true;
+  bool _showPanNumber = true;
   bool get showPanNumber => this._showPanNumber;
 
   set showPanNumber(bool value) {
     this._showPanNumber = value;
     notifyListeners();
   }
-
-
 
   bool _isPanSubmitTermAccepted = false;
   bool get getIsPanSubmitTerm => this._isPanSubmitTermAccepted;
@@ -156,6 +154,13 @@ final TextEditingController _fatherNameController = TextEditingController();
     this._isPanSubmitTermAccepted = value;
     notifyListeners();
   }
+
+  List<PanErrorModel> errorCodes = List.generate(
+    PanErrorCodes.values.length,
+    (index) => generatePanErrorModel(PanErrorCodes.values[index]),
+  );
+
+  getPanErrorModel(PanErrorCodes errorCode) => generatePanErrorModel(errorCode);
 
   // PAN Verification Logic -- End
 

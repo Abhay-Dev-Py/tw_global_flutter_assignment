@@ -38,11 +38,14 @@ abstract class Routes {
   static const PAN_FRONT_VIEW = _Paths.PAN_FRONT_VIEW;
   static const PAN_REVIEW_VIEW = _Paths.PAN_REVIEW_VIEW;
   static const PAN_SUBMIT_VIEW = _Paths.PAN_SUBMIT_VIEW;
+  static const PAN_ERROR_VIEW = _Paths.PAN_ERROR_VIEW;
+  static const HELP_DESK_VIEW = _Paths.HELP_DESK_VIEW;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
   static const LANDING = '/landing';
+  static const HELP_DESK_VIEW = '/help_desk_view';
 
   static const ONBOARDING_LOCATION = '/onboarding_location';
   static const ONBOARDING_MOBILE_NUMBER = '/onboarding_mobile_number';
@@ -71,8 +74,10 @@ abstract class _Paths {
   static const ADMIN_AGENT_OTP_VERIFY = '/admin_agent_otp_verify';
   static const ADMIN_AGENT_VERIFICATION_STATUS =
       '/admin_agent_verification_status';
+
   static const PAN_UPLOAD_VIEW = '/pan_upload_view';
   static const PAN_FRONT_VIEW = '/pan_front_view';
-static const PAN_REVIEW_VIEW = '/pan_review_view';
-static const PAN_SUBMIT_VIEW = '/pan_submit_view';
+  static const PAN_REVIEW_VIEW = '/pan_review_view';
+  static const PAN_SUBMIT_VIEW = '/pan_submit_view';
+  static const PAN_ERROR_VIEW = '/pan_error_view';
 }

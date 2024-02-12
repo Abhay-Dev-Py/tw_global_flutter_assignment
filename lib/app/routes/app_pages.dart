@@ -3,6 +3,7 @@ import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_age
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_request_details_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_verification_status_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_dashboard_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_error_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_front_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_review_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/pan_verification_views/pan_submit_view.dart';
@@ -26,6 +27,7 @@ import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_ve
 import 'package:flutter_getx_template/app/modules/onboarding/views/onboarding_verify_mobile_otp_view.dart';
 import 'package:flutter_getx_template/app/modules/sign_in/view/sign_in_mobile_number_view.dart';
 import 'package:flutter_getx_template/app/modules/sign_in/view/sign_in_passcode_verify_screen.dart';
+import 'package:flutter_getx_template/app/modules/widgets/help_desk_view.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,7 +36,7 @@ part 'app_routes.dart';
 abstract class AppPages {
   const AppPages._();
 
-  static const INITIAL = Routes.PAN_SUBMIT_VIEW;
+  static const INITIAL = Routes.HELP_DESK_VIEW;
 
   static final routes = [
     GetPage(
@@ -152,8 +154,14 @@ abstract class AppPages {
       name: _Paths.PAN_SUBMIT_VIEW,
       page: () => const PanSubmitView(),
     ),
-    
-    
+    GetPage(
+      name: _Paths.PAN_ERROR_VIEW,
+      page: () => const PanErrorView(),
+    ),
+    GetPage(
+      name: _Paths.HELP_DESK_VIEW,
+      page: () => const HelpDeskView(),
+    ),
   ];
 
   static final goRoutes = GoRouter(

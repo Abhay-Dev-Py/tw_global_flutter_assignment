@@ -109,6 +109,7 @@ class CustomTextFieldWidget extends StatelessWidget {
           counterText: "",
           border: InputBorder.none,
           hintText: hintText,
+          hintStyle: const TextStyle(color: AppColors.hintInfotextColor),
           errorText: showValidation ? errorText : null,
           errorMaxLines: 3,
           suffixIcon: suffixIcon,
