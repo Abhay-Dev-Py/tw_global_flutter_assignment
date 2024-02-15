@@ -79,12 +79,14 @@ class AdminDashboardProvider extends ChangeNotifier {
   List<AgentVerificationStepModel> agentVerificationSteps = [
     AgentVerificationStepModel(
       isActive: true,
+      isCompleted: true,
       stepTitle: "PAN verification",
       stepDescription: "Upload PAN of agent to verify",
       stepNavigationRoute: Routes.PAN_UPLOAD_VIEW,
       step: AgentVerificationFlowStep.pan_verification,
     ),
     AgentVerificationStepModel(
+      isActive: true,
       stepTitle: "Details Confirmation",
       stepDescription: "Confirm agent details",
       stepNavigationRoute: Routes.LANDING,
@@ -238,7 +240,6 @@ class AdminDashboardProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   final TextEditingController _dobController = TextEditingController();
   TextEditingController get dobController => this._dobController;
 
@@ -246,7 +247,6 @@ class AdminDashboardProvider extends ChangeNotifier {
     this._dobController.text = Utils.formatDateString(value);
     notifyListeners();
   }
-
 
   setVerificationDetails(ReviewAgentDetails detail, dynamic value) {
     switch (detail) {
@@ -286,8 +286,6 @@ class AdminDashboardProvider extends ChangeNotifier {
         break;
     }
   }
-
-
 
   // Details Confirmation Logic -- End
 

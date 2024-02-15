@@ -154,27 +154,44 @@ class VerificationStepWidget extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Container(
-                  height: 24.h,
-                  width: 24.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: model.isActive
-                        ? AppColors.lightBlue
-                        : AppColors.lightGrey,
-                  ),
-                  child: Center(
-                    child: Container(
-                      height: 12.h,
-                      width: 12.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:
-                            model.isActive ? AppColors.blue : AppColors.white,
+                model.isCompleted
+                    ? Container(
+                        height: 24.h,
+                        width: 24.h,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.lightGreen,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                            color: AppColors.blue,
+                            size: 18.h,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 24.h,
+                        width: 24.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: model.isActive
+                              ? AppColors.lightBlue
+                              : AppColors.lightGrey,
+                        ),
+                        child: Center(
+                          child: Container(
+                            height: 12.h,
+                            width: 12.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: model.isActive
+                                  ? AppColors.blue
+                                  : AppColors.white,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
                 SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

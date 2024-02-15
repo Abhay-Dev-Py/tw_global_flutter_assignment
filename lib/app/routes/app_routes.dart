@@ -43,6 +43,12 @@ abstract class Routes {
   static const PAN_ERROR_VIEW = _Paths.PAN_ERROR_VIEW;
 
   static const CONFIRM_AGENT_DETAILS_VIEW = _Paths.CONFIRM_AGENT_DETAILS_VIEW;
+  
+  static const CAPTURE_SHOP_PICTURE_VIEW = _Paths.CAPTURE_SHOP_PICTURE_VIEW;
+  static const UPLOAD_SHOP_PICTURE_VIEW = _Paths.UPLOAD_SHOP_PICTURE_VIEW;
+
+  static const CAPTURE_AGENT_PICTURE_VIEW = _Paths.CAPTURE_AGENT_PICTURE_VIEW;
+  static const UPLOAD_AGENT_PICTURE_VIEW = _Paths.UPLOAD_AGENT_PICTURE_VIEW;
 }
 
 abstract class _Paths {
@@ -85,4 +91,11 @@ abstract class _Paths {
   static const PAN_ERROR_VIEW = '/pan_error_view';
 
   static const CONFIRM_AGENT_DETAILS_VIEW = '/confirm_agent_details_view';
+
+  static const CAPTURE_SHOP_PICTURE_VIEW = '/capture_shop_picture_view';
+  static const UPLOAD_SHOP_PICTURE_VIEW = '/upload_shop_picture_view';
+  
+  static const CAPTURE_AGENT_PICTURE_VIEW = '/capture_agent_picture_view';
+  static const UPLOAD_AGENT_PICTURE_VIEW = '/upload_agent_picture_view';
+  
 }
