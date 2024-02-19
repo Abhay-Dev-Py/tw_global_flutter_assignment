@@ -92,3 +92,9 @@ enum ReviewAgentDetails {
   country,
   pincode,
 }
+
+enum BiometricSteps {
+  device_connected_status,
+  battery_status,
+  rd_service_app_status,
+}

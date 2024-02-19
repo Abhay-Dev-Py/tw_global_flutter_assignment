@@ -3,6 +3,8 @@ import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_age
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_request_details_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_agent_verification_status_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/admin_dashboard_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/agent_biometric_views/biometric_steps_view.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/view/agent_mobile_verification_view/agent_mobile_verification_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/agent_picture_verification_views/capture_agent_picture_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/agent_picture_verification_views/upload_agent_picture_view.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/view/details_confirmation_views/confirm_agent_details_view.dart';
@@ -41,7 +43,7 @@ part 'app_routes.dart';
 abstract class AppPages {
   const AppPages._();
 
-  static const INITIAL = Routes.CAPTURE_AGENT_PICTURE_VIEW;
+  static const INITIAL = Routes.BIOMETRIC_STEPS_VIEW;
 
   static final routes = [
     GetPage(
@@ -186,6 +188,14 @@ abstract class AppPages {
     GetPage(
       name: _Paths.UPLOAD_AGENT_PICTURE_VIEW,
       page: () => const UploadAgentPictureView(),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_AGENT_NUMBER_VIEW,
+      page: () => const AgentMobileVerificationView(),
+    ),
+    GetPage(
+      name: _Paths.BIOMETRIC_STEPS_VIEW,
+      page: () => const BiometricStepsView(),
     ),
   ];
 

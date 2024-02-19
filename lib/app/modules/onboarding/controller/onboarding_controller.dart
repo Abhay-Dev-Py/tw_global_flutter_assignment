@@ -36,7 +36,10 @@ class OnboardingProvider extends ChangeNotifier {
   bool _inAsyncCall = false;
   bool get inAsyncCall => this._inAsyncCall;
 
-  set inAsyncCall(bool value) => this._inAsyncCall = value;
+  set inAsyncCall(bool value) {
+    this._inAsyncCall = value;
+    notifyListeners();
+  }
 
   OnboardingSteps get currentStep {
     notifyListeners();

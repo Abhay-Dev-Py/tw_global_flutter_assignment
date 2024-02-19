@@ -49,6 +49,12 @@ abstract class Routes {
 
   static const CAPTURE_AGENT_PICTURE_VIEW = _Paths.CAPTURE_AGENT_PICTURE_VIEW;
   static const UPLOAD_AGENT_PICTURE_VIEW = _Paths.UPLOAD_AGENT_PICTURE_VIEW;
+
+  static const VERIFY_AGENT_NUMBER_VIEW = _Paths.VERIFY_AGENT_NUMBER_VIEW;
+
+  static const BIOMETRIC_STEPS_VIEW = _Paths.BIOMETRIC_STEPS_VIEW;
+
+  
 }
 
 abstract class _Paths {
@@ -98,4 +104,7 @@ abstract class _Paths {
   static const CAPTURE_AGENT_PICTURE_VIEW = '/capture_agent_picture_view';
   static const UPLOAD_AGENT_PICTURE_VIEW = '/upload_agent_picture_view';
   
+  static const VERIFY_AGENT_NUMBER_VIEW = '/verify_agent_number_view';
+
+  static const BIOMETRIC_STEPS_VIEW = '/biometric_steps_view';
 }

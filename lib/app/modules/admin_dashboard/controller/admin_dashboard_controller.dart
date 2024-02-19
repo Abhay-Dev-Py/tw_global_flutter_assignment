@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/constants.dart';
 import 'package:flutter_getx_template/app/common/models/agent_details_verification_model.dart';
 import 'package:flutter_getx_template/app/common/util/utils.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/agent_request_model.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/agent_verification_step_model.dart';
+import 'package:flutter_getx_template/app/modules/admin_dashboard/model/biometric_step_model.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/model/pan_error_model.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
 
@@ -11,6 +15,14 @@ class AdminDashboardProvider extends ChangeNotifier {
   AdminSelectedTab _selectedTab = AdminSelectedTab.in_progress;
   AdminSelectedTab get selectedTab => this._selectedTab;
   AgentDetailsVerificationModel verificationModel = getVerificationModel;
+
+  bool _inAsyncCall = false;
+  bool get inAsyncCall => this._inAsyncCall;
+
+  set inAsyncCall(bool value) {
+    this._inAsyncCall = value;
+    notifyListeners();
+  }
 
   set selectedTab(AdminSelectedTab value) {
     this._selectedTab = value;
@@ -288,6 +300,102 @@ class AdminDashboardProvider extends ChangeNotifier {
   }
 
   // Details Confirmation Logic -- End
+
+  // -------------------------------------------------
+
+  // Agent Mobile Verification  Logic -- Start
+
+  final TextEditingController _mobileOTPController = TextEditingController();
+  TextEditingController get mobileOTPController => this._mobileOTPController;
+
+  set setMobileOTPControllerValue(String value) {
+    this._mobileOTPController.text = value;
+    notifyListeners();
+  }
+
+  bool _clearMobileOtp = false;
+  bool get clearMobileOtp => this._clearMobileOtp;
+
+  set clearMobileOtp(bool value) {
+    this._clearMobileOtp = value;
+    setMobileOTPControllerValue = "";
+    notifyListeners();
+  }
+
+  late Timer _timer;
+  int _secondsRemaining = 0;
+
+  int get secondsRemaining => _secondsRemaining;
+
+  String get formattedTime {
+    int minutes = _secondsRemaining ~/ 60;
+    int seconds = _secondsRemaining % 60;
+    return '$minutes:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  void startTimer() {
+    _secondsRemaining = Constants.otpResendSeconds;
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_secondsRemaining > 0) {
+        _secondsRemaining--;
+        notifyListeners();
+      } else {
+        _timer.cancel();
+      }
+    });
+  }
+
+  void disposeTimer() {
+    _timer.cancel();
+  }
+
+  // Agent Mobile Verification  Logic -- End
+
+  // -------------------------------------------------
+
+  // Biometric Verification Logic -- Start
+
+  bool _rdServiceAppInstalled = false;
+  bool get rdServiceAppInstalled => this._rdServiceAppInstalled;
+
+  set rdServiceAppInstalled(bool value) {
+    this._rdServiceAppInstalled = value;
+    notifyListeners();
+  }
+
+  List<BiometricStepModel> biometricStepModel = [
+    BiometricStepModel(
+      step: BiometricSteps.device_connected_status,
+      stepDescription: "Device is connected and ready",
+    ),
+    BiometricStepModel(
+      step: BiometricSteps.battery_status,
+      stepDescription: "You have more than 20% battery",
+    ),
+    BiometricStepModel(
+      step: BiometricSteps.rd_service_app_status,
+      stepDescription: "You have installed RD service app",
+    ),
+  ];
+
+  checkBiometricStatus() async {
+    // check for device connected status
+    try {
+      biometricStepModel[0].completionStatus = false;
+
+      // check for device battery percentage
+      var battery = Battery();
+      if (await battery.batteryLevel > 20) {
+        biometricStepModel[1].completionStatus = true;
+      }
+    } on Exception catch (_) {
+    }
+
+    // check for RD serivice app
+    notifyListeners();
+  }
+
+  // Biometric Verification Logic -- End
 
   // -------------------------------------------------
 

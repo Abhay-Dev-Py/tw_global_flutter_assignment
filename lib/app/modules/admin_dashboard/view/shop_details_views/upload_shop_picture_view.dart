@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
 import 'package:flutter_getx_template/app/modules/admin_dashboard/controller/admin_dashboard_controller.dart';
+import 'package:flutter_getx_template/app/modules/widgets/custom_bottom_sheets.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_scaffold_widget.dart';
 import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
 import 'package:flutter_getx_template/app/routes/app_pages.dart';
@@ -105,7 +106,7 @@ class _UploadShopPictureViewState extends State<UploadShopPictureView> {
           bottomSheet: Column(
             children: [
               CustomTextButton(
-                title: "submit",
+                title: "approve",
                 onPressed: () {
                   Get.toNamed(Routes.PAN_SUBMIT_VIEW);
                 },
@@ -113,10 +114,10 @@ class _UploadShopPictureViewState extends State<UploadShopPictureView> {
               SizedBox(height: 20.h),
               GestureDetector(
                 onTap: () {
-                  Get.back();
+                  showRejectionDialog(context: context);
                 },
                 child: Text(
-                  "retake",
+                  "reject",
                   style: AppTextStyle.lightStyle.copyWith(
                     fontWeight: FontWeight.w400,
                     fontSize: 14.sp,

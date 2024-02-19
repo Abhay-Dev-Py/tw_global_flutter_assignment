@@ -30,12 +30,12 @@ class _AdminAgentOtpVerifyViewState extends State<AdminAgentOtpVerifyView> {
     return Consumer<AdminDashboardProvider>(
       builder: (context, adminDashboardProvider, __) {
         return AppScaffold(
-          appBar:AppBar(
-        leading: GestureDetector(
-          onTap: () => Get.back(),
-          child: const Icon(Icons.arrow_back_rounded),
-        ),
-      ),
+          appBar: AppBar(
+            leading: GestureDetector(
+              onTap: () => Get.back(),
+              child: const Icon(Icons.arrow_back_rounded),
+            ),
+          ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -109,7 +109,7 @@ class _AdminAgentOtpVerifyViewState extends State<AdminAgentOtpVerifyView> {
 
   @override
   void dispose() {
-    Provider.of<OnboardingProvider>(context, listen: false).disposeTimer();
+    Provider.of<AdminDashboardProvider>(context, listen: false).disposeTimer();
     super.dispose();
   }
 }
