@@ -1,4 +1,4 @@
-package com.thealteria.flutter_getx_template
+package com.appreciate.bcapp
 
 import io.flutter.embedding.android.FlutterActivity
 

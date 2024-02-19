@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.thealteria.flutter_getx_template"
+        applicationId "com.appreciate.bcapp"
         minSdkVersion 33
         targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
