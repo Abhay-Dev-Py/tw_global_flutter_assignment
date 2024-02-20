@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_getx_template/app/data/api_helper_impl.dart';
@@ -33,7 +34,7 @@ abstract class Initializer {
   static Future<void> _initServices() async {
     try {
       await _initStorage();
-
+      await Firebase.initializeApp(); 
       _initScreenPreference();
     } catch (err) {
       rethrow;
