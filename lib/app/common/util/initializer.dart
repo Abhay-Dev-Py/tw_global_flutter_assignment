@@ -1,22 +1,15 @@
 import 'dart:async';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_getx_template/app/data/api_helper_impl.dart';
 import 'package:flutter_getx_template/app/data/interface_controller/api_interface_controller.dart';
-import 'package:flutter_getx_template/app/modules/widgets/custom_error_widget.dart';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 abstract class Initializer {
   static void init(VoidCallback runApp) {
-    ErrorWidget.builder = (errorDetails) {
-      return CustomErrorWidget(
-        message: errorDetails.exceptionAsString(),
-      );
-    };
-
     runZonedGuarded(() async {
       WidgetsFlutterBinding.ensureInitialized();
       FlutterError.onError = (details) {
@@ -34,7 +27,7 @@ abstract class Initializer {
   static Future<void> _initServices() async {
     try {
       await _initStorage();
-      await Firebase.initializeApp(); 
+      
       _initScreenPreference();
     } catch (err) {
       rethrow;
@@ -57,7 +50,7 @@ class InitialBindings extends Bindings {
   @override
   void dependencies() {
     Get.put<ApiHelperImpl>(
-       ApiHelperImpl(),
+      ApiHelperImpl(),
     );
 
     Get.put<ApiInterfaceController>(

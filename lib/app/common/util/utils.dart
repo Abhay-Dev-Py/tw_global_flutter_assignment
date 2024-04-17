@@ -3,56 +3,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_template/app/common/util/exports.dart';
-import 'package:flutter_getx_template/app/modules/widgets/custom_inkwell_widget.dart';
-import 'package:flutter_getx_template/app/modules/widgets/custom_text_button.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 abstract class Utils {
-  static void showDialog(
-    String? message, {
-    String title = Strings.error,
-    bool success = false,
-    VoidCallback? onTap,
-  }) =>
-      Get.defaultDialog(
-        barrierDismissible: false,
-        onWillPop: () async {
-          Get.back();
-
-          onTap?.call();
-
-          return true;
-        },
-        title: success ? Strings.success : title,
-        content: Text(
-          message ?? Strings.somethingWentWrong,
-          textAlign: TextAlign.center,
-          maxLines: 6,
-          style: AppTextStyle.semiBoldStyle.copyWith(
-            color: AppColors.mineShaft,
-            fontSize: Dimens.fontSize16,
-          ),
-        ),
-        confirm: Align(
-          alignment: Alignment.centerRight,
-          child: CustomInkwellWidget.text(
-            onTap: () {
-              Get.back();
-
-              onTap?.call();
-            },
-            title: Strings.ok,
-            textStyle: AppTextStyle.buttonTextStyle.copyWith(
-              fontSize: Dimens.fontSize18,
-            ),
-          ),
-        ),
-      );
-
   static void showIconDialog(
     String title,
     String message, {
@@ -84,14 +40,6 @@ abstract class Utils {
                 ),
               ),
               SizedBox(height: 20.w),
-              CustomTextButton(
-                title: Strings.ok,
-                onPressed: () {
-                  Get.back();
-
-                  onTap?.call();
-                },
-              ),
             ],
           ),
         ),
@@ -314,13 +262,5 @@ abstract class Utils {
     }
   }
 
-  static launchCaller(String mobileNumber) async {
-    String url = "tel:+91$mobileNumber";
 
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 }
